@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import IntroSection from '~/components/templates/IntroSection'
 import Navbar from '~/components/templates/Navbar'
+import SummarySection from '~/components/templates/SummarySection'
 
 const Home: NextPage = () => {
   const [navBg, setNavBg] = useState(false)
@@ -18,7 +19,10 @@ const Home: NextPage = () => {
     }
   }, [])
   return (
-    <div className="flex min-h-screen flex-col font-poppins">
+    <div className="flex min-h-screen flex-col font-poppins antialiased">
+      <div className="block lg:hidden">
+        <div className=" block inset-0 absolute box-border m-0 bg-gray-50"></div>
+      </div>
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
@@ -32,26 +36,9 @@ const Home: NextPage = () => {
       >
         <Navbar />
       </header>
-      <main className="flex w-full flex-col text-center ">
+      <main className="flex w-full relative flex-col text-center">
         <IntroSection />
-        {/* <section>
-          <div className="flex justify-between items-center">
-            <div className="flex flex-col text-gray-500 text-left">
-              <span className="font-semibold text-sm ">HELLO</span>
-              <span className="text-5xl font-bold my-3 text-gray-700">
-                I'm Rogelio John
-              </span>
-              <span className="font-medium text-lg">
-                IT Graduate & Junior Web Developer
-              </span>
-              <div>
-                <button className="rounded-md shadow-md border-2 border-amber-400 hover:bg-white hover:text-amber-400 font-semibold text-xs my-10 p-3 bg-amber-400 text-white">
-                  GET TO KNOW ME
-                </button>
-              </div>
-            </div>
-          </div>
-        </section> */}
+        <SummarySection />
       </main>
 
       {/* <footer className="flex h-24 w-full items-center justify-center border-t">
