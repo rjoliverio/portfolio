@@ -19,7 +19,7 @@ const Home: NextPage = () => {
     }
   }, [])
   return (
-    <div className="flex min-h-screen flex-col antialiased">
+    <div id="Home" className="flex min-h-screen flex-col antialiased">
       <div className="block lg:hidden">
         <div className=" block inset-0 absolute box-border m-0 bg-gray-50"></div>
       </div>

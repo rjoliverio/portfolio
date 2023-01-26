@@ -1,45 +1,43 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { Menu as MenuIcon } from 'react-feather'
 import { navLinks } from '~/shared/json/links'
+import { Link } from 'react-scroll'
 
 type Props = {}
 
 const Navbar = (props: Props) => {
+  const [active, setActive] = useState<string>('Home')
   return (
     <nav>
       <div className="flex flex-wrap max-w-4xl items-center justify-between mx-auto py-2 px-5 lg:px-2 md:p-0 md:px-5">
         <a href="#" className="items-center hidden md:flex">
           <img src="/images/rj-logo-4.png" className=" w-36" alt="RJ Logo" />
         </a>
-        {/* <button
-          data-collapse-toggle="navbar-default"
-          type="button"
-          className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 "
-          aria-controls="navbar-default"
-          aria-expanded="false"
-        >
-          <span className="sr-only">Open main menu</span>
-          <MenuIcon className="w-6 h-6" />
-        </button> */}
         <div
           className="hidden w-full md:flex md:w-auto md:order-1"
           id="navbar-default"
         >
           <ul className="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg  md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 ">
             {navLinks.map((link, i) => (
-              <li key={i}>
-                <a
-                  href="#"
-                  className={`block py-2 pl-3 pr-4 ${
-                    link.name === 'Home'
-                      ? 'text-amber-400 border-b border-amber-400'
-                      : 'text-gray-500 '
-                  }  md:p-0 hover:text-amber-400`}
-                  aria-current="page"
+              <li key={i} className="cursor-pointer">
+                <Link
+                  activeClass="active"
+                  smooth
+                  spy
+                  to={link.name}
+                  onSetActive={(to: string) => setActive(to)}
                 >
-                  {link.name}
-                </a>
+                  <span
+                    className={`block py-2 pl-3 pr-4 ${
+                      link.name === active
+                        ? 'text-amber-400 border-b border-amber-400'
+                        : 'text-gray-500 '
+                    }  md:p-0 hover:text-amber-400`}
+                  >
+                    {link.name}
+                  </span>
+                </Link>
               </li>
             ))}
           </ul>

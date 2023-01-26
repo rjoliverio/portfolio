@@ -6,9 +6,9 @@ export const navLinks = [
     name: 'About',
   },
   {
-    name: 'Portfolio',
+    name: 'Contact',
   },
   {
-    name: 'Contact',
+    name: 'Portfolio',
   },
 ]

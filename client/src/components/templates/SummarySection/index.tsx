@@ -4,7 +4,7 @@ type Props = {}
 
 const SummarySection = (props: Props) => {
   return (
-    <section className="h-full w-full px-5 py-40 ">
+    <section id="About" className="h-full w-full px-5 py-40 ">
       <div className="flex flex-col lg:flex-row lg:justify-between max-w-4xl mx-auto lg:space-x-20">
         <div className="flex flex-col text-gray-500 text-left my-10 lg:my-0">
           <div className="relative">
