@@ -14,7 +14,7 @@ const SummarySection = (props: Props) => {
               alt="background-shape"
             />
           </div>
-          <div className="z-50 lg:my-auto mb-5">
+          <div className="z-10 lg:my-auto mb-5">
             <span className="text-3xl font-bold  border-b-4 pb-2 border-amber-400  text-gray-700">
               About Me
             </span>
