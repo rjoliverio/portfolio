@@ -1,6 +1,8 @@
 import React from 'react'
+import { motion } from 'framer-motion'
 import { useRouter } from 'next/router'
 
+import { fadeInUp, stagger } from '~/shared/animation'
 import { resumeDetails } from '~/shared/json/resumeDetails'
 
 type Props = {}
@@ -8,9 +10,15 @@ type Props = {}
 const ProfileDetails = (props: Props) => {
   const router = useRouter()
   return (
-    <div className="w-full  flex flex-col flex-1 bg-gray-100 border shadow h-full rounded-xl z-10">
+    <motion.div
+      variants={stagger}
+      className="w-full  flex flex-col flex-1 bg-gray-100 border shadow h-full rounded-xl z-10"
+    >
       <div className="flex flex-col p-5 w-full space-y-3">
-        <div className="flex flex-row items-center justify-between w-full">
+        <motion.div
+          variants={fadeInUp}
+          className="flex flex-row items-center justify-between w-full"
+        >
           <span className=" uppercase text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-400">
             Summary
           </span>
@@ -20,25 +28,28 @@ const ProfileDetails = (props: Props) => {
           >
             Skills
           </span>
-        </div>
-        <div className="w-full text-justify">
+        </motion.div>
+        <motion.div variants={fadeInUp} className="w-full text-justify">
           <span className="text-sm text-justify">{resumeDetails.summary}</span>
-        </div>
+        </motion.div>
       </div>
       <hr />
       <div className="flex flex-col p-5 w-full space-y-3">
-        <div className="flex flex-row items-center justify-between w-full">
+        <motion.div
+          variants={fadeInUp}
+          className="flex flex-row items-center justify-between w-full"
+        >
           <span className=" uppercase text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-400">
             Education
           </span>
-        </div>
+        </motion.div>
         <div className="flex w-full flex-col lg:flex-row space-x-3 lg:space-x-12 space-y-2 lg:space-y-0">
-          <div className="flex w-40 h-full">
+          <motion.div variants={fadeInUp} className="flex w-40 h-full">
             <span className="text-xs text-left py-0.5 px-2 bg-gradient-to-r from-cyan-500 to-blue-400 rounded-xl text-white font-semibold">
               {resumeDetails.education.date_inclusion}
             </span>
-          </div>
-          <div className="flex flex-col text-left">
+          </motion.div>
+          <motion.div variants={fadeInUp} className="flex flex-col text-left">
             <span className="text-sm font-semibold text-left text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-400">
               {resumeDetails.education.degree}
             </span>
@@ -51,36 +62,42 @@ const ProfileDetails = (props: Props) => {
             <span className="text-sm italic text-left">
               {resumeDetails.education.award}
             </span>
-          </div>
+          </motion.div>
         </div>
       </div>
       <hr />
       <div className="flex flex-col p-5 w-full space-y-3">
-        <div className="flex flex-row items-center justify-between w-full">
+        <motion.div
+          variants={fadeInUp}
+          className="flex flex-row items-center justify-between w-full"
+        >
           <span className=" uppercase text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-400">
             Experiences
           </span>
-        </div>
+        </motion.div>
         {resumeDetails.work_experiences.map((work, i) => (
           <div
             key={i}
             className="flex w-full flex-col lg:flex-row space-x-3 lg:space-x-12 space-y-2 lg:space-y-0"
           >
-            <div className="flex w-auto lg:w-40 h-full">
+            <motion.div
+              variants={fadeInUp}
+              className="flex w-auto lg:w-40 h-full"
+            >
               <span className="text-xs text-left py-0.5 px-2 bg-gradient-to-r from-cyan-500 to-blue-400 rounded-xl text-white font-semibold">
                 {work.date_inclusion}
               </span>
-            </div>
-            <div className="flex flex-col text-left">
+            </motion.div>
+            <motion.div variants={fadeInUp} className="flex flex-col text-left">
               <span className="text-sm font-semibold text-left text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-400">
                 {work.position}
               </span>
               <span className="text-sm  text-left">{work.company}</span>
-            </div>
+            </motion.div>
           </div>
         ))}
       </div>
-    </div>
+    </motion.div>
   )
 }
 

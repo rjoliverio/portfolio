@@ -35,3 +35,20 @@ export const stagger = {
     },
   },
 }
+
+export const slideToRight = (barWidth: number) => {
+  return {
+    initial: {
+      width: 0,
+    },
+    animate: {
+      width: barWidth + '%',
+      transition: {
+        duration: 0.4,
+        type: 'spring',
+        damping: 12,
+        stiffness: 100,
+      },
+    },
+  }
+}

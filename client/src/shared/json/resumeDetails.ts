@@ -54,58 +54,58 @@ export const resumeDetails = {
       tools: [
         {
           name: 'Visual Studio Code',
-          percentage: '70%',
+          percentage: 70,
           icon: VisualStudioIcon,
         },
         {
-          name: 'Git and Github',
-          percentage: '65%',
+          name: 'Git & Github',
+          percentage: 65,
           icon: GitIcon,
         },
         {
           name: 'Docker Desktop',
-          percentage: '50%',
+          percentage: 50,
           icon: DockerIcon,
         },
       ],
       database_management: [
         {
           name: 'MySQL',
-          percentage: '70%',
+          percentage: 70,
           icon: MysqlIcon,
         },
       ],
       languages: [
         {
           name: 'JavaScript',
-          percentage: '70%',
+          percentage: 70,
           icon: JavascriptIcon,
         },
         {
           name: 'NextJS',
-          percentage: '45%',
+          percentage: 45,
           icon: NextjsIcon,
         },
         {
           name: 'TailwindCSS',
-          percentage: '45%',
+          percentage: 45,
           icon: TailwindIcon,
         },
         {
           name: 'Laravel MVC',
-          percentage: '55%',
+          percentage: 55,
           icon: LaravelIcon,
         },
       ],
       deployment: [
         {
           name: 'Heroku',
-          percentage: '60%',
+          percentage: 60,
           icon: HerokuIcon,
         },
         {
           name: 'Vercel',
-          percentage: '60%',
+          percentage: 60,
           icon: VercelIcon,
         },
       ],

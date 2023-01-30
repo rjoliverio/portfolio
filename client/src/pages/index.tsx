@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion'
 import type { NextPage } from 'next'
+import { motion } from 'framer-motion'
 import { useRouter } from 'next/router'
 import { TypeAnimation } from 'react-type-animation'
 
@@ -20,7 +20,7 @@ const Home: NextPage = () => {
           <div className="flex justify-center lg:justify-between items-center space-x-5 max-w-5xl mx-auto ">
             <div className="flex flex-col text-gray-500 text-left">
               <span className="font-semibold text-sm ">HELLO 👋</span>
-              <span className="text-5xl font-bold my-3 text-gray-700">
+              <span className="text-4xl md:text-5xl font-bold my-3 text-gray-700">
                 I'm{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-400">
                   {' '}
@@ -56,7 +56,7 @@ const Home: NextPage = () => {
             </div>
             <motion.div
               variants={stagger}
-              className="relative hidden lg:flex-1 lg:flex h-[600px] transition ease-in-out duration-700 mx-auto lg:flex-shrink-0"
+              className="relative hidden lg:flex-1 lg:flex h-[560px] transition ease-in-out duration-700 mx-auto lg:flex-shrink-0"
             >
               <motion.div variants={fadeInUp} className="z-20">
                 <a href="#">
@@ -116,7 +116,7 @@ const Home: NextPage = () => {
                 className="object-contain object-center w-40 absolute right-20 top-24"
                 alt="circle dot"
               />
-              <div className="bg-gradient-to-r from-cyan-400 to-blue-400 absolute shadow-lg bottom-0 h-[340px] w-[400px] left-0 right-0 rounded-xl mx-auto"></div>
+              <div className="bg-gradient-to-r from-cyan-400 to-blue-400 absolute shadow-lg bottom-0 h-[320px] w-[380px] left-0 right-0 rounded-xl mx-auto"></div>
             </motion.div>
           </div>
         </motion.div>
