@@ -1,16 +1,18 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { Menu as MenuIcon } from 'react-feather'
+import { useRouter } from 'next/router'
+import Link from 'next/link'
+
 import { navLinks } from '~/shared/json/links'
-import { Link } from 'react-scroll'
 
 type Props = {}
 
 const Navbar = (props: Props) => {
-  const [active, setActive] = useState<string>('Home')
+  const router = useRouter()
   return (
     <nav>
-      <div className="flex flex-wrap max-w-4xl items-center justify-between mx-auto py-2 px-5 lg:px-2 md:p-0 md:px-5">
+      <div className="flex flex-wrap max-w-5xl items-center justify-between mx-auto py-2 px-5 lg:px-2 md:p-0 md:px-5">
         <a href="#" className="items-center hidden md:flex">
           <img src="/images/rj-logo-4.png" className=" w-36" alt="RJ Logo" />
         </a>
@@ -21,16 +23,15 @@ const Navbar = (props: Props) => {
           <ul className="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg  md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 ">
             {navLinks.map((link, i) => (
               <li key={i} className="cursor-pointer">
-                <Link
-                  activeClass="active"
-                  smooth
-                  spy
-                  to={link.name}
-                  onSetActive={(to: string) => setActive(to)}
-                >
+                <Link href={link.path}>
                   <span
                     className={`block py-2 pl-3 pr-4 ${
-                      link.name === active
+                      router.pathname.match(new RegExp(`^${link.path}$`, 'i'))
+                        ?.length
+                        ? 'text-amber-400 border-b border-amber-400'
+                        : router.pathname.match(
+                            new RegExp(`^/about/skills$`, 'i')
+                          ) && link.path === '/about'
                         ? 'text-amber-400 border-b border-amber-400'
                         : 'text-gray-500 '
                     }  md:p-0 hover:text-amber-400`}
