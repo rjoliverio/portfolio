@@ -13,7 +13,7 @@ const Navbar = (props: Props) => {
   return (
     <nav>
       <div className="flex flex-wrap max-w-5xl items-center justify-between mx-auto py-2 px-5 lg:px-2 md:p-0 md:px-5">
-        <a href="#" className="items-center hidden md:flex">
+        <a href="/" className="items-center hidden md:flex">
           <img src="/images/rj-logo-4.png" className=" w-36" alt="RJ Logo" />
         </a>
         <div
@@ -45,7 +45,7 @@ const Navbar = (props: Props) => {
         </div>
         <Menu as="div" className="relative text-left w-full block md:hidden">
           <div className="flex justify-between">
-            <a href="https://flowbite.com/" className="items-center flex">
+            <a href="/" className="items-center flex">
               <img src="/images/rj-logo-2.png" className=" w-8" alt="RJ Logo" />
             </a>
             <div>
@@ -67,15 +67,21 @@ const Navbar = (props: Props) => {
               <div className="p-2 w-full bg-white rounded-md space-y-2 shadow">
                 {navLinks.map((link, i) => (
                   <Menu.Item key={i}>
-                    {({ active }) => (
-                      <button
-                        className={`${
-                          active ? 'bg-violet-500 text-white' : 'text-gray-600'
-                        } group bg-gray-100 hover:bg-amber-400 flex font-medium w-full max-w-7xl items-center px-5 py-2 text-sm rounded-md`}
-                      >
-                        {link.name}
-                      </button>
-                    )}
+                    <Link
+                      href={link.path}
+                      className={`${
+                        router.pathname.match(new RegExp(`^${link.path}$`, 'i'))
+                          ?.length
+                          ? 'bg-amber-400 text-white'
+                          : router.pathname.match(
+                              new RegExp(`^/about/skills$`, 'i')
+                            ) && link.path === '/about'
+                          ? 'bg-amber-400 text-white'
+                          : 'bg-gray-100'
+                      } group  hover:bg-amber-200 flex font-medium w-full max-w-7xl items-center px-5 py-2 text-sm rounded-md`}
+                    >
+                      {link.name}
+                    </Link>
                   </Menu.Item>
                 ))}
               </div>

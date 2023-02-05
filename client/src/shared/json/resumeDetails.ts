@@ -17,6 +17,7 @@ export const resumeDetails = {
   address: 'Compostela, Cebu, Philippines',
   contacts: {
     email: 'rjmoliverio@gmail.com',
+    phone: '+639454250787',
   },
   socials: {
     linkedin: '',
