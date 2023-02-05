@@ -23,7 +23,7 @@ const Layout: FC<Props> = ({ metaTitle, children }): JSX.Element => {
   }, [])
   return (
     <div className="flex min-h-screen h-screen flex-col antialiased bg-gray-50">
-      <div className="block absolute inset-0 bg-[url('/images/shapes-bg.svg')] bg-repeat-space"></div>
+      <div className="block absolute inset-0 bg-[url('/images/shapes-bg.svg')] bg-center"></div>
       <Head>
         <title>{metaTitle}</title>
         <link rel="icon" href="/favicon.ico" />
