@@ -26,11 +26,11 @@ const Layout: FC<Props> = ({ metaTitle, children }): JSX.Element => {
   }, [])
   return (
     <div className="flex h-full min-h-screen flex-col bg-gray-50 antialiased">
-      <div className="absolute inset-0 block bg-[url('/images/shapes-bg.svg')] bg-center"></div>
       <Head>
         <title>{metaTitle}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <div className="absolute inset-0 block bg-[url('/images/shapes-bg.svg')] bg-center"></div>
       <header
         className={`sticky top-0 z-50 w-full bg-gray-50 backdrop-blur-md  ${
           navBg
@@ -42,9 +42,7 @@ const Layout: FC<Props> = ({ metaTitle, children }): JSX.Element => {
       </header>
       <main
         className={`flex h-full w-full flex-1 ${
-          router.pathname.match(new RegExp(`^/portfolio$`, 'i'))?.length
-            ? null
-            : 'items-center justify-center'
+          router.pathname.includes('portfolio') ? null : 'items-center justify-center'
         } my-auto flex-col bg-gray-50 px-5 text-center`}
       >
         {children}

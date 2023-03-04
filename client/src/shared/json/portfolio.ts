@@ -13,7 +13,7 @@ export const portfolio = [
       type: 'web',
       link: 'https://gtrack-client.herokuapp.com/'
     },
-    start_date: '2021-01-01',
+    start_date: '2022-01-01',
     finished_date: '2022-04-04'
   },
   {
@@ -30,7 +30,7 @@ export const portfolio = [
       type: 'mobile',
       link: 'https://play.google.com/store/apps/details?id=com.gtrack.mobile'
     },
-    start_date: '2021-01-01',
+    start_date: '2022-01-01',
     finished_date: '2022-04-04'
   },
   {
@@ -47,7 +47,7 @@ export const portfolio = [
       type: 'web',
       link: 'https://instagram-clone.vercel.app'
     },
-    start_date: '2021-01-01',
+    start_date: '2022-12-05',
     finished_date: '2022-12-12'
   },
   {
@@ -98,7 +98,7 @@ export const portfolio = [
       type: 'web',
       link: 'https://sph-els-rogelio-client.herokuapp.com/'
     },
-    start_date: '2022-12-05',
+    start_date: '2022-08-16',
     finished_date: '2022-09-30'
   }
 ]
