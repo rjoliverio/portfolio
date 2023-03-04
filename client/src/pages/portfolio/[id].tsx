@@ -3,7 +3,7 @@ import type { NextPage } from 'next'
 import Layout from '~/components/templates/Layout'
 import UnderConstructionPage from '~/components/templates/UnderConstruction'
 
-const Portfolio: NextPage = () => {
+const PortfolioDetails: NextPage = () => {
   return (
     <Layout metaTitle="Page Under Construction">
       <UnderConstructionPage />
@@ -11,4 +11,4 @@ const Portfolio: NextPage = () => {
   )
 }
 
-export default Portfolio
+export default PortfolioDetails

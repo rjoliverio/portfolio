@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import React, { FC, ReactNode, useEffect, useState } from 'react'
 
 import Navbar from './Navbar'
@@ -9,6 +10,8 @@ type Props = {
 }
 
 const Layout: FC<Props> = ({ metaTitle, children }): JSX.Element => {
+  const router = useRouter()
+
   const [navBg, setNavBg] = useState(false)
 
   const changeNavBg = () => {
@@ -22,22 +25,28 @@ const Layout: FC<Props> = ({ metaTitle, children }): JSX.Element => {
     }
   }, [])
   return (
-    <div className="flex min-h-screen h-screen flex-col antialiased bg-gray-50">
-      <div className="block absolute inset-0 bg-[url('/images/shapes-bg.svg')] bg-center"></div>
+    <div className="flex h-full min-h-screen flex-col bg-gray-50 antialiased">
+      <div className="absolute inset-0 block bg-[url('/images/shapes-bg.svg')] bg-center"></div>
       <Head>
         <title>{metaTitle}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header
-        className={`w-full sticky top-0 z-50 backdrop-blur-md bg-gray-50  ${
+        className={`sticky top-0 z-50 w-full bg-gray-50 backdrop-blur-md  ${
           navBg
-            ? 'drop-shadow-md transition duration-300 ease-in-out bg-white/60'
-            : ' drop-shadow-none bg-gray-50'
+            ? 'bg-white/60 drop-shadow-md transition duration-300 ease-in-out'
+            : ' bg-gray-50 drop-shadow-none'
         }`}
       >
         <Navbar />
       </header>
-      <main className="flex w-full items-center justify-center my-auto flex-col text-center bg-gray-50 px-5">
+      <main
+        className={`flex h-full w-full flex-1 ${
+          router.pathname.match(new RegExp(`^/portfolio$`, 'i'))?.length
+            ? null
+            : 'items-center justify-center'
+        } my-auto flex-col bg-gray-50 px-5 text-center`}
+      >
         {children}
       </main>
     </div>

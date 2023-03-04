@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 
 import { resumeDetails } from '~/shared/json/resumeDetails'
 import { fadeInUp, slideToRight, stagger } from '~/shared/animation'
+import { AlignJustify, List } from 'react-feather'
 
 type Props = {}
 
@@ -12,37 +13,40 @@ const SkillsDetails = (props: Props) => {
   return (
     <motion.div
       variants={stagger}
-      className="w-full  flex flex-col flex-1 bg-gray-100 border shadow h-full rounded-xl z-10"
+      className="z-10  flex h-full w-full flex-1 flex-col rounded-xl border bg-gray-100 shadow"
     >
-      <div className="flex flex-col p-5 w-full space-y-3">
+      <div className="flex w-full flex-col space-y-3 p-5">
         <motion.div
           variants={fadeInUp}
-          className="flex flex-row items-center justify-between w-full"
+          className="flex w-full flex-row items-center justify-between"
         >
-          <span className=" uppercase text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-500">
+          <span className=" bg-gradient-to-r from-yellow-400 to-amber-500 bg-clip-text text-xl font-bold uppercase text-transparent">
             Technical Skills
           </span>
-          <span
-            onClick={() => router.push('/about')}
-            className="cursor-pointer hover:scale-110 transition-all duration-300 uppercase text-md font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-400"
-          >
-            Summary
-          </span>
+          <div className="flex cursor-pointer items-center space-x-1 transition-all duration-300 hover:scale-110">
+            <AlignJustify className="h-4 w-4 text-cyan-400" />
+            <span
+              onClick={() => router.push('/about')}
+              className="text-md  bg-gradient-to-r from-cyan-500 to-blue-400 bg-clip-text font-bold uppercase text-transparent "
+            >
+              Summary
+            </span>
+          </div>
         </motion.div>
-        <div className="w-full flex flex-col text-justify space-y-3">
-          <div className="flex w-full flex-col lg:flex-row space-x-0 lg:space-x-12 space-y-2 lg:space-y-0">
+        <div className="flex w-full flex-col space-y-3 text-justify">
+          <div className="flex w-full flex-col space-x-0 space-y-2 lg:flex-row lg:space-x-12 lg:space-y-0">
             <div className="flex w-40">
-              <span className="text-sm text-left w-full">Tools</span>
+              <span className="w-full text-left text-sm">Tools</span>
             </div>
-            <div className="flex flex-col w-full text-justify space-y-2">
+            <div className="flex w-full flex-col space-y-2 text-justify">
               {resumeDetails.skills.technical_skills.tools.map((tool, i) => (
-                <div key={i} className="w-full bg-gray-200 rounded-full">
+                <div key={i} className="w-full rounded-full bg-gray-200">
                   <motion.div
                     variants={slideToRight(tool.percentage)}
                     style={{ width: tool.percentage + '%' }}
                     initial="initial"
                     animate="animate"
-                    className="bg-gradient-to-r space-x-1 flex items-center from-amber-500 to-yellow-400 text-xs font-medium text-white text-left p-1.5 leading-none rounded-full"
+                    className="flex items-center space-x-1 rounded-full bg-gradient-to-r from-amber-500 to-yellow-400 p-1.5 text-left text-xs font-medium leading-none text-white"
                   >
                     <tool.icon className="h-3 w-3" /> <span>{tool.name}</span>
                   </motion.div>
@@ -51,98 +55,88 @@ const SkillsDetails = (props: Props) => {
             </div>
           </div>
           <hr />
-          <div className="flex w-full flex-col lg:flex-row space-x-0 lg:space-x-12 space-y-2 lg:space-y-0">
+          <div className="flex w-full flex-col space-x-0 space-y-2 lg:flex-row lg:space-x-12 lg:space-y-0">
             <div className="flex w-40">
-              <span className="text-sm text-left w-full ">
-                Database Management
-              </span>
+              <span className="w-full text-left text-sm ">Database Management</span>
             </div>
-            <div className="flex flex-col w-full text-justify space-y-2">
-              {resumeDetails.skills.technical_skills.database_management.map(
-                (db, i) => (
-                  <div key={i} className="w-full bg-gray-200 rounded-full">
-                    <motion.div
-                      variants={slideToRight(db.percentage)}
-                      initial="initial"
-                      animate="animate"
-                      className="bg-gradient-to-r space-x-1 flex items-center from-amber-500 to-yellow-400 text-xs font-medium text-white text-left p-1.5 leading-none rounded-full"
-                      style={{ width: db.percentage + '%' }}
-                    >
-                      <db.icon className="h-3 w-3" /> <span>{db.name}</span>
-                    </motion.div>
-                  </div>
-                )
-              )}
+            <div className="flex w-full flex-col space-y-2 text-justify">
+              {resumeDetails.skills.technical_skills.database_management.map((db, i) => (
+                <div key={i} className="w-full rounded-full bg-gray-200">
+                  <motion.div
+                    variants={slideToRight(db.percentage)}
+                    initial="initial"
+                    animate="animate"
+                    className="flex items-center space-x-1 rounded-full bg-gradient-to-r from-amber-500 to-yellow-400 p-1.5 text-left text-xs font-medium leading-none text-white"
+                    style={{ width: db.percentage + '%' }}
+                  >
+                    <db.icon className="h-3 w-3" /> <span>{db.name}</span>
+                  </motion.div>
+                </div>
+              ))}
             </div>
           </div>
           <hr />
-          <div className="flex w-full flex-col lg:flex-row space-x-0 lg:space-x-12 space-y-2 lg:space-y-0">
+          <div className="flex w-full flex-col space-x-0 space-y-2 lg:flex-row lg:space-x-12 lg:space-y-0">
             <div className="flex w-40">
-              <span className="text-sm text-left w-full ">
-                Languages & Frameworks
-              </span>
+              <span className="w-full text-left text-sm ">Languages & Frameworks</span>
             </div>
-            <div className="flex flex-col w-full text-justify space-y-2">
-              {resumeDetails.skills.technical_skills.languages.map(
-                (language, i) => (
-                  <div key={i} className="w-full bg-gray-200 rounded-full">
-                    <motion.div
-                      variants={slideToRight(language.percentage)}
-                      initial="initial"
-                      animate="animate"
-                      className="bg-gradient-to-r space-x-1 flex items-center from-amber-500 to-yellow-400 text-xs font-medium text-white text-left p-1.5 leading-none rounded-full"
-                      style={{ width: language.percentage + '%' }}
-                    >
-                      <language.icon className="h-3 w-3" />
-                      <span>{language.name}</span>
-                    </motion.div>
-                  </div>
-                )
-              )}
+            <div className="flex w-full flex-col space-y-2 text-justify">
+              {resumeDetails.skills.technical_skills.languages.map((language, i) => (
+                <div key={i} className="w-full rounded-full bg-gray-200">
+                  <motion.div
+                    variants={slideToRight(language.percentage)}
+                    initial="initial"
+                    animate="animate"
+                    className="flex items-center space-x-1 rounded-full bg-gradient-to-r from-amber-500 to-yellow-400 p-1.5 text-left text-xs font-medium leading-none text-white"
+                    style={{ width: language.percentage + '%' }}
+                  >
+                    <language.icon className="h-3 w-3" />
+                    <span>{language.name}</span>
+                  </motion.div>
+                </div>
+              ))}
             </div>
           </div>
           <hr />
-          <div className="flex w-full flex-col lg:flex-row space-x-0 lg:space-x-12 space-y-2 lg:space-y-0">
+          <div className="flex w-full flex-col space-x-0 space-y-2 lg:flex-row lg:space-x-12 lg:space-y-0">
             <div className="flex w-40">
-              <span className="text-sm text-left w-full ">Deployment</span>
+              <span className="w-full text-left text-sm ">Deployment</span>
             </div>
-            <div className="flex flex-col w-full text-justify space-y-2">
-              {resumeDetails.skills.technical_skills.deployment.map(
-                (deploy, i) => (
-                  <div key={i} className="w-full bg-gray-200 rounded-full">
-                    <motion.div
-                      variants={slideToRight(deploy.percentage)}
-                      initial="initial"
-                      animate="animate"
-                      className="bg-gradient-to-r space-x-1 flex items-center from-amber-500 to-yellow-400 text-xs font-medium text-white text-left p-1.5 leading-none rounded-full"
-                      style={{ width: deploy.percentage + '%' }}
-                    >
-                      <deploy.icon className="h-3 w-3" />
-                      <span>{deploy.name}</span>
-                    </motion.div>
-                  </div>
-                )
-              )}
+            <div className="flex w-full flex-col space-y-2 text-justify">
+              {resumeDetails.skills.technical_skills.deployment.map((deploy, i) => (
+                <div key={i} className="w-full rounded-full bg-gray-200">
+                  <motion.div
+                    variants={slideToRight(deploy.percentage)}
+                    initial="initial"
+                    animate="animate"
+                    className="flex items-center space-x-1 rounded-full bg-gradient-to-r from-amber-500 to-yellow-400 p-1.5 text-left text-xs font-medium leading-none text-white"
+                    style={{ width: deploy.percentage + '%' }}
+                  >
+                    <deploy.icon className="h-3 w-3" />
+                    <span>{deploy.name}</span>
+                  </motion.div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </div>
       <hr />
-      <div className="flex flex-col p-5 w-full space-y-3">
-        <div className="flex flex-row items-center justify-between w-full">
-          <span className=" uppercase text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-500">
+      <div className="flex w-full flex-col space-y-3 p-5">
+        <div className="flex w-full flex-row items-center justify-between">
+          <span className=" bg-gradient-to-r from-yellow-400 to-amber-500 bg-clip-text text-xl font-bold uppercase text-transparent">
             Soft Skills
           </span>
         </div>
         <div className="flex w-full flex-row space-x-12">
-          <div className="flex w-full space-x-2 flex-wrap lg:space-y-0">
+          <div className="flex w-full flex-wrap space-x-2 lg:space-y-0">
             {resumeDetails.skills.soft_skills.map((soft, i) => (
               <motion.div
                 variants={fadeInUp}
                 key={i}
-                className={`text-sm text-center mb-2 ${
+                className={`mb-2 text-center text-sm ${
                   !i ? 'ml-2 lg:ml-0' : ''
-                } lg:mb-0 py-0.5 px-2 bg-gray-400 rounded-xl text-white font-medium`}
+                } rounded-xl bg-gray-400 py-0.5 px-2 font-medium text-white lg:mb-0`}
               >
                 {soft.name}
               </motion.div>
