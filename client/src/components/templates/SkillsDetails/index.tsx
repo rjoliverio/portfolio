@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 
 import { resumeDetails } from '~/shared/json/resumeDetails'
 import { fadeInUp, slideToRight, stagger } from '~/shared/animation'
-import { AlignJustify, List } from 'react-feather'
+import { List } from 'react-feather'
 
 type Props = {}
 
@@ -24,7 +24,7 @@ const SkillsDetails = (props: Props) => {
             Technical Skills
           </span>
           <div className="flex cursor-pointer items-center space-x-1 transition-all duration-300 hover:scale-110">
-            <AlignJustify className="h-4 w-4 text-cyan-400" />
+            <List className="h-4 w-4 text-cyan-400" />
             <span
               onClick={() => router.push('/about')}
               className="text-md  bg-gradient-to-r from-cyan-500 to-blue-400 bg-clip-text font-bold uppercase text-transparent "
