@@ -1,6 +1,6 @@
 import moment from 'moment'
 import type { NextPage } from 'next'
-import { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { AlertCircle, Calendar, GitHub, Search } from 'react-feather'
 
 import Layout from '~/components/templates/Layout'
@@ -36,7 +36,6 @@ const Portfolio: NextPage = () => {
       ...projects.filter((item) => item.title.toLowerCase().includes(search.toLowerCase())),
     ]
     setProjects(temp)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search])
 
   return (

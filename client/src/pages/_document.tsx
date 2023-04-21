@@ -1,5 +1,5 @@
 import NextDocument, { Html, Head, Main, NextScript } from 'next/document'
-
+import React from 'react'
 class Document extends NextDocument {
   render() {
     return (
@@ -8,7 +8,6 @@ class Document extends NextDocument {
           <link rel="icon" href="/favicon.ico" />
           <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
           <meta name="description" content="Rj Oliverio" />
-          {/* eslint-disable @next/next/no-page-custom-font */}
           <link
             href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap"
             rel="stylesheet"
