@@ -14,6 +14,7 @@ const Portfolio: NextPage = () => {
   const [search, setSearch] = useState<string>('')
   const [projects, setProjects] = useState<IPortfolio[]>(portfolio)
   const searchInput = useRef<HTMLInputElement | null>(null)
+  console.log(search)
   const handleSearchOnClick = (): void => {
     setSearch(searchInput.current?.value as string)
     setProjects(portfolio)
@@ -31,12 +32,12 @@ const Portfolio: NextPage = () => {
     }
   }
   useEffect(() => {
-    setProjects(portfolio)
     const temp = [
       ...projects.filter((item) => item.title.toLowerCase().includes(search.toLowerCase())),
     ]
     setProjects(temp)
-  }, [search, projects])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search])
 
   return (
     <Layout metaTitle="Page Under Construction">
