@@ -6,9 +6,7 @@ import { resumeDetails } from '~/shared/json/resumeDetails'
 import { fadeInUp, slideToRight, stagger } from '~/shared/animation'
 import { List } from 'react-feather'
 
-type Props = {}
-
-const SkillsDetails = (props: Props) => {
+const SkillsDetails = () => {
   const router = useRouter()
   return (
     <motion.div

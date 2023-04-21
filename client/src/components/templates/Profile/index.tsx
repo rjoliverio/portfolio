@@ -1,4 +1,6 @@
 import React from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/router'
 import { Download, Mail, MapPin } from 'react-feather'
@@ -8,11 +10,8 @@ import { GoogleIcon } from '~/shared/icons/GoogleIcon'
 import { fadeInUp, stagger } from '~/shared/animation'
 import { LinkedinIcon } from '~/shared/icons/LinkedinIcon'
 import { resumeDetails } from '~/shared/json/resumeDetails'
-import Link from 'next/link'
 
-type Props = {}
-
-const Profile = (props: Props) => {
+const Profile = () => {
   const router = useRouter()
   return (
     <motion.div
@@ -22,15 +21,16 @@ const Profile = (props: Props) => {
       <motion.div
         variants={fadeInUp}
         className={`relative mx-auto h-52 w-52 rounded-full border-4 bg-white  ${
-          router.pathname.includes('skills')
-            ? 'border-amber-400'
-            : 'border-cyan-500'
+          router.pathname.includes('skills') ? 'border-amber-400' : 'border-cyan-500'
         }`}
       >
-        <img
+        <Image
           src="/images/square-portrait.png"
           className="absolute rounded-full object-cover"
-          alt=""
+          alt="Square Portrait"
+          fill
+          blurDataURL="/images/square-portrait.png"
+          placeholder="blur"
         />
       </motion.div>
       <div className="flex flex-col space-y-5">
@@ -56,18 +56,12 @@ const Profile = (props: Props) => {
           </button>
         </motion.div>
         <div className="flex w-full flex-col space-y-2 px-5 text-sm">
-          <motion.div
-            variants={fadeInUp}
-            className="flex items-center space-x-2"
-          >
+          <motion.div variants={fadeInUp} className="flex items-center space-x-2">
             <MapPin className="h-4 w-4" />
             <span>{resumeDetails.address}</span>
           </motion.div>
 
-          <motion.div
-            variants={fadeInUp}
-            className="flex items-center space-x-2"
-          >
+          <motion.div variants={fadeInUp} className="flex items-center space-x-2">
             <Mail className="h-4 w-4" />
             <span>{resumeDetails.contacts.email}</span>
           </motion.div>

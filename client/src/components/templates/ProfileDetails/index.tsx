@@ -6,9 +6,7 @@ import { fadeInUp, stagger } from '~/shared/animation'
 import { resumeDetails } from '~/shared/json/resumeDetails'
 import { BarChart2 } from 'react-feather'
 
-type Props = {}
-
-const ProfileDetails = (props: Props) => {
+const ProfileDetails = () => {
   const router = useRouter()
   return (
     <motion.div
