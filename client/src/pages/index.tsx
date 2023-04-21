@@ -9,7 +9,6 @@ import { fadeInUp, routeAnimation, stagger } from '~/shared/animation'
 import Link from 'next/link'
 import { resumeDetails } from '~/shared/json/resumeDetails'
 import Image from 'next/image'
-import { portfolio } from '~/shared/json/portfolio'
 
 const Home: NextPage = () => {
   const router = useRouter()

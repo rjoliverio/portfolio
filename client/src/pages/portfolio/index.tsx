@@ -14,7 +14,6 @@ const Portfolio: NextPage = () => {
   const [search, setSearch] = useState<string>('')
   const [projects, setProjects] = useState<IPortfolio[]>(portfolio)
   const searchInput = useRef<HTMLInputElement | null>(null)
-  console.log(search)
   const handleSearchOnClick = (): void => {
     setSearch(searchInput.current?.value as string)
     setProjects(portfolio)
