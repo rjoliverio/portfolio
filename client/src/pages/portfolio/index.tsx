@@ -7,6 +7,7 @@ import Layout from '~/components/templates/Layout'
 import { portfolio } from '~/shared/json/portfolio'
 import { IPortfolio } from '~/shared/interface/IPortfolio'
 import { useRouter } from 'next/router'
+import Image from 'next/image'
 
 const Portfolio: NextPage = () => {
   const router = useRouter()
@@ -30,11 +31,12 @@ const Portfolio: NextPage = () => {
     }
   }
   useEffect(() => {
+    setProjects(portfolio)
     const temp = [
       ...projects.filter((item) => item.title.toLowerCase().includes(search.toLowerCase())),
     ]
     setProjects(temp)
-  }, [search])
+  }, [search, projects])
 
   return (
     <Layout metaTitle="Page Under Construction">
@@ -85,11 +87,16 @@ const Portfolio: NextPage = () => {
                     className="flex max-w-xs flex-col justify-between space-y-3 rounded-lg border bg-white p-4 shadow-sm shadow-indigo-100"
                   >
                     <div className="space-y-3">
-                      <img
-                        alt="Home"
-                        src={item.image}
-                        className="h-56 w-full rounded-md object-cover"
-                      />
+                      <div className="relative h-56 w-full rounded-md ">
+                        <Image
+                          alt="Home"
+                          src={item.image}
+                          className="object-cover"
+                          fill
+                          blurDataURL={item.image}
+                          placeholder="blur"
+                        />
+                      </div>
                       <div className="space-y-2">
                         <div className="flex items-center space-x-2 text-left text-sm font-semibold">
                           <GitHub className="h-4 w-4" />{' '}

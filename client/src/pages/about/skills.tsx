@@ -6,18 +6,16 @@ import { routeAnimation } from '~/shared/animation'
 import Profile from '~/components/templates/Profile'
 import SkillsDetails from '~/components/templates/SkillsDetails'
 
-type Props = {}
-
-const Skills = (props: Props) => {
+const Skills = () => {
   return (
     <Layout metaTitle="Skills">
-      <section className="h-full w-full my-5 lg:my-0">
+      <section className="my-5 h-full w-full lg:my-0">
         <motion.div
           variants={routeAnimation}
           initial="initial"
           animate="animate"
           exit="exit"
-          className="flex flex-col lg:flex-row items-center justify-center mx-auto max-w-5xl lg:space-x-5 space-x-0 space-y-5 lg:space-y-0 my-auto"
+          className="mx-auto my-auto flex max-w-5xl flex-col items-center justify-center space-x-0 space-y-5 lg:flex-row lg:space-x-5 lg:space-y-0"
         >
           <Profile />
           <SkillsDetails />

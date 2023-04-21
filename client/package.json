@@ -1,6 +1,8 @@
 {
   "private": true,
   "scripts": {
+    "lint": "next lint",
+    "type": "tsc --noEmit",
     "dev": "next dev",
     "build": "next build",
     "start": "next start"
@@ -25,6 +27,8 @@
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",
     "autoprefixer": "^10.4.12",
+    "eslint": "8.38.0",
+    "eslint-config-next": "13.3.0",
     "postcss": "^8.4.18",
     "prettier": "^2.8.4",
     "prettier-plugin-tailwindcss": "^0.2.3",

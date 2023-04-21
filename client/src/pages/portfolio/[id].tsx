@@ -1,10 +1,9 @@
 import moment from 'moment'
 import type { NextPage } from 'next'
 import Image from 'next/image'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import { ChevronRight, Folder, Globe, Monitor } from 'react-feather'
+import { Globe, Monitor } from 'react-feather'
 import { Tooltip } from 'react-tooltip'
 
 import Layout from '~/components/templates/Layout'
