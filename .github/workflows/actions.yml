@@ -10,7 +10,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: "16.x"
+          node-version: "18.x"
       - run: cd client && yarn
       - run: cd client && yarn type
       - run: cd client && yarn lint

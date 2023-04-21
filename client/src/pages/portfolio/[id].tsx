@@ -2,8 +2,8 @@ import moment from 'moment'
 import type { NextPage } from 'next'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
-import { Globe, Monitor } from 'react-feather'
+import React, { useEffect, useState } from 'react'
+import { Globe, Link, Monitor } from 'react-feather'
 import { Tooltip } from 'react-tooltip'
 
 import Layout from '~/components/templates/Layout'
@@ -49,7 +49,7 @@ const PortfolioDetails: NextPage = () => {
               </div>
             </div>
             <div className="flex items-center space-x-1">
-              <a
+              <Link
                 href={project?.output_link.link as string}
                 target="_blank"
                 data-tooltip-id="details"
@@ -57,8 +57,8 @@ const PortfolioDetails: NextPage = () => {
                 className="rounded-full border bg-white p-1 shadow"
               >
                 <Globe />
-              </a>
-              <a
+              </Link>
+              <Link
                 href={project?.github_link.link as string}
                 target="_blank"
                 data-tooltip-id="details"
@@ -66,7 +66,7 @@ const PortfolioDetails: NextPage = () => {
                 className="rounded-full border bg-white p-1 shadow"
               >
                 <GithubIcon />
-              </a>
+              </Link>
             </div>
           </div>
           <div className="w-full text-left">{project?.description}</div>

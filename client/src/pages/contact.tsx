@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import type { NextPage } from 'next'
 import { motion } from 'framer-motion'
 import { Mail, MapPin, Phone, Send } from 'react-feather'
@@ -28,27 +28,16 @@ const Contact: NextPage = () => {
             className="flex w-full max-w-md flex-col space-y-5 text-left text-gray-500"
           >
             <motion.div variants={fadeInUp} className="flex flex-col">
-              <span className="text-sm font-semibold text-amber-400">
-                CONTACT US
-              </span>
-              <span className="text-3xl font-semibold text-gray-700">
-                Get In Touch With RJ
-              </span>
+              <span className="text-sm font-semibold text-amber-400">CONTACT US</span>
+              <span className="text-3xl font-semibold text-gray-700">Get In Touch With RJ</span>
             </motion.div>
-            <motion.div
-              variants={fadeInUp}
-              className="text-justify text-sm text-gray-700"
-            >
-              Should you have any questions regarding the resume, portfolios or
-              projects, you may reach me at the contact details provided below
-              or send me a message by the form. I will get back to you within 24
-              hours.
+            <motion.div variants={fadeInUp} className="text-justify text-sm text-gray-700">
+              Should you have any questions regarding the resume, portfolios or projects, you may
+              reach me at the contact details provided below or send me a message by the form. I
+              will get back to you within 24 hours.
             </motion.div>
 
-            <motion.div
-              variants={fadeInUp}
-              className="block space-y-3 lg:hidden"
-            >
+            <motion.div variants={fadeInUp} className="block space-y-3 lg:hidden">
               <div className="flex justify-center space-x-8">
                 <div
                   onClick={() => setContactType('location')}
@@ -91,10 +80,7 @@ const Contact: NextPage = () => {
               </div>
             </motion.div>
             <div className="hidden flex-row items-center justify-center space-y-0 lg:flex lg:flex-col lg:items-start lg:space-y-5">
-              <motion.div
-                variants={fadeInUp}
-                className="flex flex-row space-x-5"
-              >
+              <motion.div variants={fadeInUp} className="flex flex-row space-x-5">
                 <div className="rounded-lg bg-amber-400 p-4 text-white shadow-md">
                   <MapPin />
                 </div>
@@ -103,46 +89,30 @@ const Contact: NextPage = () => {
                   <span className="text-sm">{resumeDetails.address}</span>
                 </div>
               </motion.div>
-              <motion.div
-                variants={fadeInUp}
-                className="flex flex-row space-x-5"
-              >
+              <motion.div variants={fadeInUp} className="flex flex-row space-x-5">
                 <div className="rounded-lg bg-amber-400 p-4 text-white shadow-md">
                   <Mail />
                 </div>
                 <div className="flex flex-col">
-                  <span className="font-semibold text-gray-700">
-                    Email Address
-                  </span>
-                  <span className="text-sm">
-                    {resumeDetails.contacts.email}
-                  </span>
+                  <span className="font-semibold text-gray-700">Email Address</span>
+                  <span className="text-sm">{resumeDetails.contacts.email}</span>
                 </div>
               </motion.div>
 
-              <motion.div
-                variants={fadeInUp}
-                className="flex flex-row space-x-5"
-              >
+              <motion.div variants={fadeInUp} className="flex flex-row space-x-5">
                 <div className="rounded-lg bg-amber-400 p-4 text-white shadow-md">
                   <Phone />
                 </div>
                 <div className="flex flex-col">
-                  <span className="font-semibold text-gray-700">
-                    Contact Number
-                  </span>
-                  <span className="text-sm">
-                    {resumeDetails.contacts.phone}
-                  </span>
+                  <span className="font-semibold text-gray-700">Contact Number</span>
+                  <span className="text-sm">{resumeDetails.contacts.phone}</span>
                 </div>
               </motion.div>
             </div>
             <hr className="block lg:hidden" />
             <div className="hidden space-y-2 lg:block">
               <motion.div variants={fadeInUp}>
-                <span className="text-sm font-semibold text-amber-400">
-                  OTHERS
-                </span>
+                <span className="text-sm font-semibold text-amber-400">OTHERS</span>
               </motion.div>
               <div className="flex flex-row space-x-2">
                 <motion.div
