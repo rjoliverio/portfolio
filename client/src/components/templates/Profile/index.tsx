@@ -8,6 +8,7 @@ import { GoogleIcon } from '~/shared/icons/GoogleIcon'
 import { fadeInUp, stagger } from '~/shared/animation'
 import { LinkedinIcon } from '~/shared/icons/LinkedinIcon'
 import { resumeDetails } from '~/shared/json/resumeDetails'
+import Link from 'next/link'
 
 type Props = {}
 
@@ -16,11 +17,11 @@ const Profile = (props: Props) => {
   return (
     <motion.div
       variants={stagger}
-      className="max-w-none lg:max-w-xs w-full h-full flex flex-col flex-1 z-10  my-auto px-5 py-8 space-y-3 bg-gray-100 border rounded-xl shadow"
+      className="z-10 my-auto flex h-full w-full max-w-none flex-1 flex-col  space-y-3 rounded-xl border bg-gray-100 px-5 py-8 shadow lg:max-w-xs"
     >
       <motion.div
         variants={fadeInUp}
-        className={`relative w-52 h-52 rounded-full bg-white mx-auto border-4  ${
+        className={`relative mx-auto h-52 w-52 rounded-full border-4 bg-white  ${
           router.pathname.includes('skills')
             ? 'border-amber-400'
             : 'border-cyan-500'
@@ -34,9 +35,9 @@ const Profile = (props: Props) => {
       </motion.div>
       <div className="flex flex-col space-y-5">
         <motion.div variants={fadeInUp}>
-          <p className="font-bold text-gray-700 text-2xl">
+          <p className="text-2xl font-bold text-gray-700">
             <span
-              className={`text-transparent bg-clip-text bg-gradient-to-r ${
+              className={`bg-gradient-to-r bg-clip-text text-transparent ${
                 router.pathname.includes('skills')
                   ? 'from-yellow-400 to-amber-500'
                   : 'from-cyan-500 to-blue-400'
@@ -49,15 +50,15 @@ const Profile = (props: Props) => {
         </motion.div>
 
         <motion.div variants={fadeInUp} className="w-full px-5">
-          <button className="bg-gray-200 border-2 w-full hover:bg-gray-300 border-gray-300 flex items-center justify-center mx-auto rounded-lg p-2 px-3 text-sm">
+          <button className="mx-auto flex w-full items-center justify-center rounded-lg border-2 border-gray-300 bg-gray-200 p-2 px-3 text-sm hover:bg-gray-300">
             <Download className="mr-2 h-4 w-4" />
             Download Resume
           </button>
         </motion.div>
-        <div className="w-full px-5 flex flex-col text-sm space-y-2">
+        <div className="flex w-full flex-col space-y-2 px-5 text-sm">
           <motion.div
             variants={fadeInUp}
-            className="flex space-x-2 items-center"
+            className="flex items-center space-x-2"
           >
             <MapPin className="h-4 w-4" />
             <span>{resumeDetails.address}</span>
@@ -65,7 +66,7 @@ const Profile = (props: Props) => {
 
           <motion.div
             variants={fadeInUp}
-            className="flex space-x-2 items-center"
+            className="flex items-center space-x-2"
           >
             <Mail className="h-4 w-4" />
             <span>{resumeDetails.contacts.email}</span>
@@ -74,26 +75,35 @@ const Profile = (props: Props) => {
         <hr />
         <div className="flex flex-col space-y-3">
           <motion.div variants={fadeInUp}>
-            <p className="text-sm text-left">Others</p>
+            <p className="text-left text-sm">Others</p>
           </motion.div>
           <div className="flex flex-row space-x-2">
             <motion.div
               variants={fadeInUp}
-              className="bg-white cursor-pointer shadow p-2 rounded-full border"
+              className="cursor-pointer rounded-full border bg-white p-2 shadow"
             >
-              <GithubIcon className="w-7 h-7" />
+              <Link href={resumeDetails.socials.github} passHref>
+                <GithubIcon className="h-7 w-7" />
+              </Link>
             </motion.div>
             <motion.div
               variants={fadeInUp}
-              className="bg-white cursor-pointer shadow p-2 rounded-full border"
+              className="cursor-pointer rounded-full border bg-white p-2 shadow"
             >
-              <LinkedinIcon className="w-7 h-7" />
+              <Link href={resumeDetails.socials.linkedin} passHref>
+                <LinkedinIcon className="h-7 w-7" />
+              </Link>
             </motion.div>
             <motion.div
               variants={fadeInUp}
-              className="bg-white cursor-pointer shadow p-2 rounded-full border"
+              className="cursor-pointer rounded-full border bg-white p-2 shadow"
             >
-              <GoogleIcon className="w-7 h-7" />
+              <Link
+                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${resumeDetails.socials.gmail}`}
+                passHref
+              >
+                <GoogleIcon className="h-7 w-7" />
+              </Link>
             </motion.div>
           </div>
         </div>

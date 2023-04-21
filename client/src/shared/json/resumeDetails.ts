@@ -20,9 +20,9 @@ export const resumeDetails = {
     phone: '+639454250787',
   },
   socials: {
-    linkedin: '',
-    gmail: '',
-    github: '',
+    linkedin: 'https://www.linkedin.com/in/rogelio-john-oliverio-449b5b219/',
+    gmail: 'rjmoliverio@gmail.com',
+    github: 'https://github.com/rogeliojohnoliverio',
   },
   summary:
     'A passionate and task-driven IT fresh graduate with 1+ years of experience in web design and development. Equipped with the skills in managing database, API development, frontend integration and software containerization. Seeking to leverage the experience with developing different web applications to join as a Junior Web Developer.',
