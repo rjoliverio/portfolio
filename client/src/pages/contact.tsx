@@ -3,57 +3,74 @@ import type { NextPage } from 'next'
 import { motion } from 'framer-motion'
 import { Mail, MapPin, Phone, Send } from 'react-feather'
 
-import { fadeInUp } from '~/shared/animation'
+import { fadeInUp, routeAnimation, stagger } from '~/shared/animation'
 import Layout from '~/components/templates/Layout'
 import { GithubIcon } from '~/shared/icons/GithubIcon'
 import { GoogleIcon } from '~/shared/icons/GoogleIcon'
 import { LinkedinIcon } from '~/shared/icons/LinkedinIcon'
 import { resumeDetails } from '~/shared/json/resumeDetails'
+import Link from 'next/link'
 
 const Contact: NextPage = () => {
   const [contactType, setContactType] = useState<string>('location')
   return (
     <Layout metaTitle="Page Under Construction">
-      <section className="h-full w-full z-10">
-        <div className="flex flex-col lg:flex-row justify-center items-center p-5 lg:space-x-8 space-x-0 space-y-5 lg:space-y-0">
-          <div className="flex flex-col w-full text-gray-500 text-left space-y-5 max-w-md">
-            <div className="flex flex-col">
-              <span className="font-semibold text-sm text-amber-400">
+      <section className="z-10 h-full w-full">
+        <motion.div
+          variants={routeAnimation}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          className="flex flex-col items-center justify-center space-x-0 space-y-5 p-5 lg:flex-row lg:space-x-8 lg:space-y-0"
+        >
+          <motion.div
+            variants={stagger}
+            className="flex w-full max-w-md flex-col space-y-5 text-left text-gray-500"
+          >
+            <motion.div variants={fadeInUp} className="flex flex-col">
+              <span className="text-sm font-semibold text-amber-400">
                 CONTACT US
               </span>
-              <span className="font-semibold text-3xl text-gray-700">
+              <span className="text-3xl font-semibold text-gray-700">
                 Get In Touch With RJ
               </span>
-            </div>
-            <span className="text-sm text-gray-700 text-justify">
+            </motion.div>
+            <motion.div
+              variants={fadeInUp}
+              className="text-justify text-sm text-gray-700"
+            >
               Should you have any questions regarding the resume, portfolios or
               projects, you may reach me at the contact details provided below
               or send me a message by the form. I will get back to you within 24
               hours.
-            </span>
-            <div className="block lg:hidden space-y-3">
-              <div className="space-x-8 flex justify-center">
+            </motion.div>
+
+            <motion.div
+              variants={fadeInUp}
+              className="block space-y-3 lg:hidden"
+            >
+              <div className="flex justify-center space-x-8">
                 <div
                   onClick={() => setContactType('location')}
-                  className="bg-amber-400 p-5 text-white cursor-pointer rounded-lg shadow-md"
+                  className="cursor-pointer rounded-lg bg-amber-400 p-5 text-white shadow-md"
                 >
                   <MapPin />
                 </div>
                 <div
                   onClick={() => setContactType('email')}
-                  className="bg-amber-400 p-5 text-white cursor-pointer rounded-lg shadow-md"
+                  className="cursor-pointer rounded-lg bg-amber-400 p-5 text-white shadow-md"
                 >
                   <Mail />
                 </div>
                 <div
                   onClick={() => setContactType('phone')}
-                  className="bg-amber-400 p-5 text-white cursor-pointer rounded-lg shadow-md"
+                  className="cursor-pointer rounded-lg bg-amber-400 p-5 text-white shadow-md"
                 >
                   <Phone />
                 </div>
               </div>
               <div
-                className="p-4 mb-4 text-sm text-gray-700 flex items-center justify-center space-x-3 rounded-lg bg-gray-100 border"
+                className="mb-4 flex items-center justify-center space-x-3 rounded-lg border bg-gray-100 p-4 text-sm text-gray-700"
                 role="alert"
               >
                 {contactType === 'location' && (
@@ -72,76 +89,100 @@ const Contact: NextPage = () => {
                   </>
                 )}
               </div>
-            </div>
-            <div className="hidden lg:flex lg:flex-col flex-row lg:space-y-5 space-y-0 items-center justify-center lg:items-start">
-              <div className="flex flex-row space-x-5">
-                <div className="bg-amber-400 p-4 text-white rounded-lg shadow-md">
+            </motion.div>
+            <div className="hidden flex-row items-center justify-center space-y-0 lg:flex lg:flex-col lg:items-start lg:space-y-5">
+              <motion.div
+                variants={fadeInUp}
+                className="flex flex-row space-x-5"
+              >
+                <div className="rounded-lg bg-amber-400 p-4 text-white shadow-md">
                   <MapPin />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-gray-700 font-semibold">Location</span>
+                  <span className="font-semibold text-gray-700">Location</span>
                   <span className="text-sm">{resumeDetails.address}</span>
                 </div>
-              </div>
-              <div className="flex flex-row space-x-5">
-                <div className="bg-amber-400 p-4 text-white rounded-lg shadow-md">
+              </motion.div>
+              <motion.div
+                variants={fadeInUp}
+                className="flex flex-row space-x-5"
+              >
+                <div className="rounded-lg bg-amber-400 p-4 text-white shadow-md">
                   <Mail />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-gray-700 font-semibold">
+                  <span className="font-semibold text-gray-700">
                     Email Address
                   </span>
                   <span className="text-sm">
                     {resumeDetails.contacts.email}
                   </span>
                 </div>
-              </div>
-              <div className="flex flex-row space-x-5">
-                <div className="bg-amber-400 p-4 text-white rounded-lg shadow-md">
+              </motion.div>
+
+              <motion.div
+                variants={fadeInUp}
+                className="flex flex-row space-x-5"
+              >
+                <div className="rounded-lg bg-amber-400 p-4 text-white shadow-md">
                   <Phone />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-gray-700 font-semibold">
+                  <span className="font-semibold text-gray-700">
                     Contact Number
                   </span>
                   <span className="text-sm">
                     {resumeDetails.contacts.phone}
                   </span>
                 </div>
-              </div>
+              </motion.div>
             </div>
-            <hr className="lg:hidden block" />
-            <div className="space-y-2 hidden lg:block">
-              <span className="font-semibold text-sm text-amber-400">
-                OTHERS
-              </span>
+            <hr className="block lg:hidden" />
+            <div className="hidden space-y-2 lg:block">
+              <motion.div variants={fadeInUp}>
+                <span className="text-sm font-semibold text-amber-400">
+                  OTHERS
+                </span>
+              </motion.div>
               <div className="flex flex-row space-x-2">
                 <motion.div
                   variants={fadeInUp}
-                  className="bg-white cursor-pointer shadow p-2 rounded-full border"
+                  className="cursor-pointer rounded-full border bg-white p-2 shadow"
                 >
-                  <GithubIcon className="w-5 h-5" />
+                  <Link href={resumeDetails.socials.github} passHref>
+                    <GithubIcon className="h-5 w-5" />
+                  </Link>
                 </motion.div>
                 <motion.div
                   variants={fadeInUp}
-                  className="bg-white cursor-pointer shadow p-2 rounded-full border"
+                  className="cursor-pointer rounded-full border bg-white p-2 shadow"
                 >
-                  <LinkedinIcon className="w-5 h-5" />
+                  <Link href={resumeDetails.socials.linkedin} passHref>
+                    <LinkedinIcon className="h-5 w-5" />
+                  </Link>
                 </motion.div>
                 <motion.div
                   variants={fadeInUp}
-                  className="bg-white cursor-pointer shadow p-2 rounded-full border"
+                  className="cursor-pointer rounded-full border bg-white p-2 shadow"
                 >
-                  <GoogleIcon className="w-5 h-5" />
+                  <Link
+                    href={`https://mail.google.com/mail/?view=cm&fs=1&to=${resumeDetails.socials.gmail}`}
+                    passHref
+                  >
+                    <GoogleIcon className="h-5 w-5" />
+                  </Link>
                 </motion.div>
               </div>
             </div>
-          </div>
-          <div className="flex flex-col p-5 bg-gray-100 max-w-md w-full shadow-lg border rounded-lg py-8 space-y-6">
+          </motion.div>
+          <motion.div
+            variants={fadeInUp}
+            className="flex w-full max-w-md flex-col space-y-6 rounded-lg border bg-gray-100 p-5 py-8 shadow-lg"
+          >
             <div className="w-full text-left">
               <label
                 htmlFor="default-input"
-                className="block mb-2 text-sm font-medium text-gray-700"
+                className="mb-2 block text-sm font-medium text-gray-700"
               >
                 Name
               </label>
@@ -149,13 +190,13 @@ const Contact: NextPage = () => {
                 type="text"
                 placeholder="Your Name"
                 id="default-input"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
             <div className="w-full text-left">
               <label
                 htmlFor="default-input"
-                className="block mb-2 text-sm font-medium text-gray-700"
+                className="mb-2 block text-sm font-medium text-gray-700"
               >
                 Email
               </label>
@@ -163,34 +204,34 @@ const Contact: NextPage = () => {
                 type="email"
                 placeholder="Your Email"
                 id="default-input"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
             <div className="w-full text-left">
               <label
                 htmlFor="default-input"
-                className="block mb-2 text-sm font-medium text-gray-700"
+                className="mb-2 block text-sm font-medium text-gray-700"
               >
                 Message
               </label>
               <textarea
                 id="message"
                 rows={4}
-                className="block resize-none p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                className="block w-full resize-none rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
                 placeholder="Write your message here..."
               ></textarea>
             </div>
-            <div className="w-full flex flex-row-reverse">
+            <div className="flex w-full flex-row-reverse">
               <button
                 type="button"
-                className="focus:outline-none shadow-md flex space-x-1 items-center text-white bg-amber-400 hover:scale-110 transition-all duration-300 focus:ring-4 focus:ring-amber-300 font-medium rounded-lg text-sm px-3 py-2.5"
+                className="flex items-center space-x-1 rounded-lg bg-amber-400 px-3 py-2.5 text-sm font-medium text-white shadow-md transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-4 focus:ring-amber-300"
               >
                 <Send className="h-4 w-4" />
                 <span>Send Message</span>
               </button>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
     </Layout>
   )

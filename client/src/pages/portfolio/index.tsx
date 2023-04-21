@@ -11,19 +11,29 @@ import { useRouter } from 'next/router'
 const Portfolio: NextPage = () => {
   const router = useRouter()
   const [search, setSearch] = useState<string>('')
-  const [projects, setProjects] = useState<IPortfolio[]>([])
+  const [projects, setProjects] = useState<IPortfolio[]>(portfolio)
   const searchInput = useRef<HTMLInputElement | null>(null)
   const handleSearchOnClick = (): void => {
     setSearch(searchInput.current?.value as string)
+    setProjects(portfolio)
   }
   const handleSearchOnEnter = (e: React.KeyboardEvent<HTMLInputElement>): void => {
-    if (e.key === 'Enter') setSearch(searchInput.current?.value as string)
+    if (e.key === 'Enter') {
+      setSearch(searchInput.current?.value as string)
+      setProjects(portfolio)
+    }
   }
   const handleSearchOnChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    if (e.target.value === '') setSearch('')
+    if (e.target.value === '') {
+      setSearch('')
+      setProjects(portfolio)
+    }
   }
   useEffect(() => {
-    setProjects(portfolio.filter((item) => item.title.toLowerCase().includes(search)))
+    const temp = [
+      ...projects.filter((item) => item.title.toLowerCase().includes(search.toLowerCase())),
+    ]
+    setProjects(temp)
   }, [search])
 
   return (
@@ -67,12 +77,12 @@ const Portfolio: NextPage = () => {
               </div>
             </div>
             <hr className="w-full" />
-            <div className="z-10 grid h-full grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
+            <div className="z-10 grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
               {projects.length ? (
                 projects.map((item) => (
                   <div
                     key={item.id}
-                    className="flex h-full max-w-xs flex-col justify-between space-y-3 rounded-lg border bg-white p-4 shadow-sm shadow-indigo-100"
+                    className="flex max-w-xs flex-col justify-between space-y-3 rounded-lg border bg-white p-4 shadow-sm shadow-indigo-100"
                   >
                     <div className="space-y-3">
                       <img
@@ -109,7 +119,7 @@ const Portfolio: NextPage = () => {
                   </div>
                 ))
               ) : (
-                <div className="col-span-3 mt-5 flex w-full items-center space-x-2 text-slate-500">
+                <div className="col-span-3 mt-5 flex w-full flex-row items-center space-x-2 text-slate-500">
                   <AlertCircle />
                   <span className="text-lg font-medium ">No projects found.</span>
                 </div>
