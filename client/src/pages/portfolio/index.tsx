@@ -1,13 +1,15 @@
 import moment from 'moment'
+import Image from 'next/image'
 import type { NextPage } from 'next'
+import { motion } from 'framer-motion'
+import { useRouter } from 'next/router'
 import React, { useEffect, useRef, useState } from 'react'
 import { AlertCircle, Calendar, GitHub, Search } from 'react-feather'
 
 import Layout from '~/components/templates/Layout'
 import { portfolio } from '~/shared/json/portfolio'
 import { IPortfolio } from '~/shared/interface/IPortfolio'
-import { useRouter } from 'next/router'
-import Image from 'next/image'
+import { fadeInUp, routeAnimation, stagger } from '~/shared/animation'
 
 const Portfolio: NextPage = () => {
   const router = useRouter()
@@ -40,7 +42,13 @@ const Portfolio: NextPage = () => {
   return (
     <Layout metaTitle="Page Under Construction">
       <section className="z-10 my-5 h-full w-full">
-        <div className="mx-auto flex h-full w-full max-w-5xl items-center justify-center space-x-5 ">
+        <motion.div
+          variants={routeAnimation}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          className="mx-auto flex h-full w-full max-w-5xl items-center justify-center space-x-5 "
+        >
           <div className="flex h-full w-full flex-col items-center space-y-5">
             <div className="flex h-full w-full justify-between">
               <div className="flex w-full max-w-[10rem] flex-col text-left">
@@ -78,10 +86,14 @@ const Portfolio: NextPage = () => {
               </div>
             </div>
             <hr className="w-full" />
-            <div className="z-10 grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
+            <motion.div
+              variants={stagger}
+              className="z-10 grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3"
+            >
               {projects.length ? (
                 projects.map((item) => (
-                  <div
+                  <motion.div
+                    variants={fadeInUp}
                     key={item.id}
                     className="flex max-w-xs flex-col justify-between space-y-3 rounded-lg border bg-white p-4 shadow-sm shadow-indigo-100"
                   >
@@ -122,7 +134,7 @@ const Portfolio: NextPage = () => {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 ))
               ) : (
                 <div className="col-span-3 mt-5 flex w-full flex-row items-center space-x-2 text-slate-500">
@@ -130,9 +142,9 @@ const Portfolio: NextPage = () => {
                   <span className="text-lg font-medium ">No projects found.</span>
                 </div>
               )}
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </section>
     </Layout>
   )

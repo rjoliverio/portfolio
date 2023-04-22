@@ -1,17 +1,19 @@
+import { motion } from 'framer-motion'
 import moment from 'moment'
 import type { NextPage } from 'next'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
-import { Globe, Link, Monitor } from 'react-feather'
+import { Globe, Monitor } from 'react-feather'
 import { Tooltip } from 'react-tooltip'
 
 import Layout from '~/components/templates/Layout'
-import PortfolioBreadcrumb from '~/components/templates/PortfolioBreadcrumb'
+import { routeAnimation } from '~/shared/animation'
+import { portfolio } from '~/shared/json/portfolio'
 import { GithubIcon } from '~/shared/icons/GithubIcon'
 import { VerifiedIcon } from '~/shared/icons/VerifiedIcon'
 import { IPortfolio } from '~/shared/interface/IPortfolio'
-import { portfolio } from '~/shared/json/portfolio'
+import PortfolioBreadcrumb from '~/components/templates/PortfolioBreadcrumb'
 
 const PortfolioDetails: NextPage = () => {
   const router = useRouter()
@@ -26,7 +28,13 @@ const PortfolioDetails: NextPage = () => {
     <Layout metaTitle={project?.title as string}>
       <Tooltip id="details" />
       <section className="z-10 my-5 h-full w-full">
-        <div className="mx-auto flex h-full w-full max-w-5xl flex-col items-center justify-center space-y-5">
+        <motion.div
+          variants={routeAnimation}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          className="mx-auto flex h-full w-full max-w-5xl flex-col items-center justify-center space-y-5"
+        >
           <PortfolioBreadcrumb title={project?.title as string} />
           <div className="align-items-center flex w-full flex-row justify-between">
             <div className="flex w-full flex-col space-y-1">
@@ -49,24 +57,26 @@ const PortfolioDetails: NextPage = () => {
               </div>
             </div>
             <div className="flex items-center space-x-1">
-              <Link
+              <a
                 href={project?.output_link.link as string}
                 target="_blank"
                 data-tooltip-id="details"
                 data-tooltip-content="Visit the app"
                 className="rounded-full border bg-white p-1 shadow"
+                rel="noreferrer"
               >
                 <Globe />
-              </Link>
-              <Link
+              </a>
+              <a
                 href={project?.github_link.link as string}
                 target="_blank"
                 data-tooltip-id="details"
                 data-tooltip-content="Visit the repository"
                 className="rounded-full border bg-white p-1 shadow"
+                rel="noreferrer"
               >
                 <GithubIcon />
-              </Link>
+              </a>
             </div>
           </div>
           <div className="w-full text-left">{project?.description}</div>
@@ -81,7 +91,7 @@ const PortfolioDetails: NextPage = () => {
               className="rounded-lg bg-gray-100 transition duration-700 ease-in-out"
             />
           </div>
-        </div>
+        </motion.div>
       </section>
     </Layout>
   )
