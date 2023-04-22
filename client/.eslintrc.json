@@ -1,9 +1,5 @@
 {
   "extends": ["plugin:@typescript-eslint/recommended", "plugin:react/recommended", "prettier"],
-  "parserOptions": {
-    "sourceType": "module",
-    "project": "./tsconfig.json"
-  },
   "rules": {
     "no-unused-vars": "warn",
     "no-console": "warn",
