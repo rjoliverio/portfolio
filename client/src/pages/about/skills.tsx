@@ -8,7 +8,7 @@ import SkillsDetails from '~/components/templates/SkillsDetails'
 
 const Skills = () => {
   return (
-    <Layout metaTitle="Skills">
+    <Layout metaTitle="Rj Oliverio | Skills">
       <section className="my-5 h-full w-full lg:my-0">
         <motion.div
           variants={routeAnimation}

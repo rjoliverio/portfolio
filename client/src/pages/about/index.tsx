@@ -8,7 +8,7 @@ import ProfileDetails from '~/components/templates/ProfileDetails'
 
 const About = () => {
   return (
-    <Layout metaTitle="About">
+    <Layout metaTitle="Rj Oliverio | About">
       <section className="my-5 h-full w-full lg:my-0">
         <motion.div
           variants={routeAnimation}

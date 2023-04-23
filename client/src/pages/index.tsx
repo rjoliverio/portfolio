@@ -13,7 +13,7 @@ import Image from 'next/image'
 const Home: NextPage = () => {
   const router = useRouter()
   return (
-    <Layout metaTitle="Home">
+    <Layout metaTitle="Rj Oliverio | Home">
       <section className="h-full w-full">
         <motion.div variants={routeAnimation} initial="initial" animate="animate" exit="exit">
           <div className="mx-auto flex max-w-5xl items-center justify-center space-x-5 lg:justify-between ">
