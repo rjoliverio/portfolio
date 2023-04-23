@@ -14,7 +14,7 @@ import Link from 'next/link'
 const Contact: NextPage = () => {
   const [contactType, setContactType] = useState<string>('location')
   return (
-    <Layout metaTitle="Page Under Construction">
+    <Layout metaTitle="Rj Oliverio | Contact Us">
       <section className="z-10 h-full w-full">
         <motion.div
           variants={routeAnimation}

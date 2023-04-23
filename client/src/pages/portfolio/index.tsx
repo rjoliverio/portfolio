@@ -40,7 +40,7 @@ const Portfolio: NextPage = () => {
   }, [search])
 
   return (
-    <Layout metaTitle="Page Under Construction">
+    <Layout metaTitle="Rj Oliverio | Portfolio">
       <section className="z-10 my-5 h-full w-full">
         <motion.div
           variants={routeAnimation}

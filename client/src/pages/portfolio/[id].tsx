@@ -25,7 +25,7 @@ const PortfolioDetails: NextPage = () => {
   }, [id])
 
   return (
-    <Layout metaTitle={project?.title as string}>
+    <Layout metaTitle={`Rj Oliverio | ${project?.title as string}`}>
       <Tooltip id="details" />
       <section className="z-10 my-5 h-full w-full">
         <motion.div
