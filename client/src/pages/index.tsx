@@ -3,7 +3,6 @@ import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { TypeAnimation } from 'react-type-animation'
 
 import Layout from '~/components/templates/Layout'
 import { fadeInUp, routeAnimation, stagger } from '~/shared/animation'
@@ -13,6 +12,12 @@ import { resumeDetails } from '~/shared/json/resumeDetails'
 const MotionDiv = dynamic(() => import('framer-motion').then((module) => module.motion.div), {
   ssr: false,
 })
+const TypeAnimation = dynamic(
+  () => import('react-type-animation').then((module) => module.TypeAnimation),
+  {
+    ssr: false,
+  }
+)
 
 const Home: NextPage = () => {
   const router = useRouter()
