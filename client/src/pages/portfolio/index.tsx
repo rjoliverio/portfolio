@@ -1,7 +1,7 @@
 import moment from 'moment'
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
 import type { NextPage } from 'next'
-import { motion } from 'framer-motion'
 import { useRouter } from 'next/router'
 import React, { useEffect, useRef, useState } from 'react'
 import { AlertCircle, Calendar, GitHub, Search } from 'react-feather'
@@ -10,6 +10,10 @@ import Layout from '~/components/templates/Layout'
 import { portfolio } from '~/shared/json/portfolio'
 import { IPortfolio } from '~/shared/interface/IPortfolio'
 import { fadeInUp, routeAnimation, stagger } from '~/shared/animation'
+
+const MotionDiv = dynamic(() => import('framer-motion').then((module) => module.motion.div), {
+  ssr: false,
+})
 
 const Portfolio: NextPage = () => {
   const router = useRouter()
@@ -42,7 +46,7 @@ const Portfolio: NextPage = () => {
   return (
     <Layout metaTitle="Rj Oliverio | Portfolio">
       <section className="z-10 my-5 h-full w-full">
-        <motion.div
+        <MotionDiv
           variants={routeAnimation}
           initial="initial"
           animate="animate"
@@ -86,13 +90,13 @@ const Portfolio: NextPage = () => {
               </div>
             </div>
             <hr className="w-full" />
-            <motion.div
+            <MotionDiv
               variants={stagger}
               className="z-10 grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3"
             >
               {projects.length ? (
                 projects.map((item) => (
-                  <motion.div
+                  <MotionDiv
                     variants={fadeInUp}
                     key={item.id}
                     className="flex max-w-xs flex-col justify-between space-y-3 rounded-lg border bg-white p-4 shadow-sm shadow-indigo-100"
@@ -134,7 +138,7 @@ const Portfolio: NextPage = () => {
                         </div>
                       </div>
                     </div>
-                  </motion.div>
+                  </MotionDiv>
                 ))
               ) : (
                 <div className="col-span-3 mt-5 flex w-full flex-row items-center space-x-2 text-slate-500">
@@ -142,9 +146,9 @@ const Portfolio: NextPage = () => {
                   <span className="text-lg font-medium ">No projects found.</span>
                 </div>
               )}
-            </motion.div>
+            </MotionDiv>
           </div>
-        </motion.div>
+        </MotionDiv>
       </section>
     </Layout>
   )

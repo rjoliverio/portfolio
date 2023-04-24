@@ -7,7 +7,10 @@ class Document extends NextDocument {
         <Head>
           <link rel="icon" href="/favicon.ico" />
           <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
-          <meta name="description" content="Rj Oliverio" />
+          <meta name="description" content="Making websites that work for you" key="desc" />
+          <meta property="og:title" content="Rj Oliverio | Making websites that work for you" />
+          <meta property="og:description" content="Learn more about Rj Oliverio" />
+          <meta property="og:image" content="/images/seo-cover.png" />
           <link
             href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap"
             rel="stylesheet"

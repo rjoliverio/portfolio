@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import Link from 'next/link'
+import dynamic from 'next/dynamic'
 import type { NextPage } from 'next'
-import { motion } from 'framer-motion'
+import React, { useState } from 'react'
 import { Mail, MapPin, Phone, Send } from 'react-feather'
 
 import { fadeInUp, routeAnimation, stagger } from '~/shared/animation'
@@ -9,35 +10,38 @@ import { GithubIcon } from '~/shared/icons/GithubIcon'
 import { GoogleIcon } from '~/shared/icons/GoogleIcon'
 import { LinkedinIcon } from '~/shared/icons/LinkedinIcon'
 import { resumeDetails } from '~/shared/json/resumeDetails'
-import Link from 'next/link'
+
+const MotionDiv = dynamic(() => import('framer-motion').then((module) => module.motion.div), {
+  ssr: false,
+})
 
 const Contact: NextPage = () => {
   const [contactType, setContactType] = useState<string>('location')
   return (
     <Layout metaTitle="Rj Oliverio | Contact Us">
       <section className="z-10 h-full w-full">
-        <motion.div
+        <MotionDiv
           variants={routeAnimation}
           initial="initial"
           animate="animate"
           exit="exit"
           className="flex flex-col items-center justify-center space-x-0 space-y-5 p-5 lg:flex-row lg:space-x-8 lg:space-y-0"
         >
-          <motion.div
+          <MotionDiv
             variants={stagger}
             className="flex w-full max-w-md flex-col space-y-5 text-left text-gray-500"
           >
-            <motion.div variants={fadeInUp} className="flex flex-col">
+            <MotionDiv variants={fadeInUp} className="flex flex-col">
               <span className="text-sm font-semibold text-amber-400">CONTACT US</span>
               <span className="text-3xl font-semibold text-gray-700">Get In Touch With RJ</span>
-            </motion.div>
-            <motion.div variants={fadeInUp} className="text-justify text-sm text-gray-700">
+            </MotionDiv>
+            <MotionDiv variants={fadeInUp} className="text-justify text-sm text-gray-700">
               Should you have any questions regarding the resume, portfolios or projects, you may
               reach me at the contact details provided below or send me a message by the form. I
               will get back to you within 24 hours.
-            </motion.div>
+            </MotionDiv>
 
-            <motion.div variants={fadeInUp} className="block space-y-3 lg:hidden">
+            <MotionDiv variants={fadeInUp} className="block space-y-3 lg:hidden">
               <div className="flex justify-center space-x-8">
                 <div
                   onClick={() => setContactType('location')}
@@ -78,9 +82,9 @@ const Contact: NextPage = () => {
                   </>
                 )}
               </div>
-            </motion.div>
+            </MotionDiv>
             <div className="hidden flex-row items-center justify-center space-y-0 lg:flex lg:flex-col lg:items-start lg:space-y-5">
-              <motion.div variants={fadeInUp} className="flex flex-row space-x-5">
+              <MotionDiv variants={fadeInUp} className="flex flex-row space-x-5">
                 <div className="rounded-lg bg-amber-400 p-4 text-white shadow-md">
                   <MapPin />
                 </div>
@@ -88,8 +92,8 @@ const Contact: NextPage = () => {
                   <span className="font-semibold text-gray-700">Location</span>
                   <span className="text-sm">{resumeDetails.address}</span>
                 </div>
-              </motion.div>
-              <motion.div variants={fadeInUp} className="flex flex-row space-x-5">
+              </MotionDiv>
+              <MotionDiv variants={fadeInUp} className="flex flex-row space-x-5">
                 <div className="rounded-lg bg-amber-400 p-4 text-white shadow-md">
                   <Mail />
                 </div>
@@ -97,9 +101,9 @@ const Contact: NextPage = () => {
                   <span className="font-semibold text-gray-700">Email Address</span>
                   <span className="text-sm">{resumeDetails.contacts.email}</span>
                 </div>
-              </motion.div>
+              </MotionDiv>
 
-              <motion.div variants={fadeInUp} className="flex flex-row space-x-5">
+              <MotionDiv variants={fadeInUp} className="flex flex-row space-x-5">
                 <div className="rounded-lg bg-amber-400 p-4 text-white shadow-md">
                   <Phone />
                 </div>
@@ -107,31 +111,31 @@ const Contact: NextPage = () => {
                   <span className="font-semibold text-gray-700">Contact Number</span>
                   <span className="text-sm">{resumeDetails.contacts.phone}</span>
                 </div>
-              </motion.div>
+              </MotionDiv>
             </div>
             <hr className="block lg:hidden" />
             <div className="hidden space-y-2 lg:block">
-              <motion.div variants={fadeInUp}>
+              <MotionDiv variants={fadeInUp}>
                 <span className="text-sm font-semibold text-amber-400">OTHERS</span>
-              </motion.div>
+              </MotionDiv>
               <div className="flex flex-row space-x-2">
-                <motion.div
+                <MotionDiv
                   variants={fadeInUp}
                   className="cursor-pointer rounded-full border bg-white p-2 shadow"
                 >
                   <Link href={resumeDetails.socials.github} passHref>
                     <GithubIcon className="h-5 w-5" />
                   </Link>
-                </motion.div>
-                <motion.div
+                </MotionDiv>
+                <MotionDiv
                   variants={fadeInUp}
                   className="cursor-pointer rounded-full border bg-white p-2 shadow"
                 >
                   <Link href={resumeDetails.socials.linkedin} passHref>
                     <LinkedinIcon className="h-5 w-5" />
                   </Link>
-                </motion.div>
-                <motion.div
+                </MotionDiv>
+                <MotionDiv
                   variants={fadeInUp}
                   className="cursor-pointer rounded-full border bg-white p-2 shadow"
                 >
@@ -141,11 +145,11 @@ const Contact: NextPage = () => {
                   >
                     <GoogleIcon className="h-5 w-5" />
                   </Link>
-                </motion.div>
+                </MotionDiv>
               </div>
             </div>
-          </motion.div>
-          <motion.div
+          </MotionDiv>
+          <MotionDiv
             variants={fadeInUp}
             className="flex w-full max-w-md flex-col space-y-6 rounded-lg border bg-gray-100 p-5 py-8 shadow-lg"
           >
@@ -200,8 +204,8 @@ const Contact: NextPage = () => {
                 <span>Send Message</span>
               </button>
             </div>
-          </motion.div>
-        </motion.div>
+          </MotionDiv>
+        </MotionDiv>
       </section>
     </Layout>
   )

@@ -1,7 +1,7 @@
-import { motion } from 'framer-motion'
 import moment from 'moment'
 import type { NextPage } from 'next'
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { Globe, Monitor } from 'react-feather'
@@ -14,6 +14,10 @@ import { GithubIcon } from '~/shared/icons/GithubIcon'
 import { VerifiedIcon } from '~/shared/icons/VerifiedIcon'
 import { IPortfolio } from '~/shared/interface/IPortfolio'
 import PortfolioBreadcrumb from '~/components/templates/PortfolioBreadcrumb'
+
+const MotionDiv = dynamic(() => import('framer-motion').then((module) => module.motion.div), {
+  ssr: false,
+})
 
 const PortfolioDetails: NextPage = () => {
   const router = useRouter()
@@ -28,7 +32,7 @@ const PortfolioDetails: NextPage = () => {
     <Layout metaTitle={`Rj Oliverio | ${project?.title as string}`}>
       <Tooltip id="details" />
       <section className="z-10 my-5 h-full w-full">
-        <motion.div
+        <MotionDiv
           variants={routeAnimation}
           initial="initial"
           animate="animate"
@@ -91,7 +95,7 @@ const PortfolioDetails: NextPage = () => {
               className="rounded-lg bg-gray-100 transition duration-700 ease-in-out"
             />
           </div>
-        </motion.div>
+        </MotionDiv>
       </section>
     </Layout>
   )
