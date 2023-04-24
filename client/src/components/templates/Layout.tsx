@@ -28,11 +28,6 @@ const Layout: FC<Props> = ({ metaTitle, children }): JSX.Element => {
     <div className="flex h-full min-h-screen flex-col bg-gray-50 antialiased">
       <Head>
         <title>{metaTitle}</title>
-        <link rel="icon" href="/favicon.ico" />
-        <meta name="description" content="Making websites that work for you" key="desc" />
-        <meta property="og:title" content="Rj Oliverio" />
-        <meta property="og:description" content="Learn more about Rj Oliverio" />
-        <meta property="og:image" content="/images/seo-cover.png" />
       </Head>
       <div className="absolute inset-0 block bg-[url('/images/shapes-bg.svg')] bg-center"></div>
       <header

@@ -1,16 +1,24 @@
 import React from 'react'
-import { motion } from 'framer-motion'
+import dynamic from 'next/dynamic'
 
 import Layout from '~/components/templates/Layout'
 import { routeAnimation } from '~/shared/animation'
-import Profile from '~/components/templates/Profile'
-import ProfileDetails from '~/components/templates/ProfileDetails'
+
+const MotionDiv = dynamic(() => import('framer-motion').then((module) => module.motion.div), {
+  ssr: false,
+})
+const Profile = dynamic(() => import('~/components/templates/Profile'), {
+  ssr: false,
+})
+const ProfileDetails = dynamic(() => import('~/components/templates/ProfileDetails'), {
+  ssr: false,
+})
 
 const About = () => {
   return (
     <Layout metaTitle="Rj Oliverio | About">
       <section className="my-5 h-full w-full lg:my-0">
-        <motion.div
+        <MotionDiv
           variants={routeAnimation}
           initial="initial"
           animate="animate"
@@ -19,7 +27,7 @@ const About = () => {
         >
           <Profile />
           <ProfileDetails />
-        </motion.div>
+        </MotionDiv>
       </section>
     </Layout>
   )
