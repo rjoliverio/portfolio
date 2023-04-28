@@ -53,7 +53,6 @@ const Navbar = () => {
               <Image
                 src="/images/rj-logo-2.png"
                 blurDataURL="/images/rj-logo-2.png"
-                placeholder="blur"
                 className="w-8"
                 width={32}
                 height={32}
