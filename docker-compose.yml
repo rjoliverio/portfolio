@@ -8,14 +8,12 @@ services:
     restart: unless-stopped
     tty: true
     ports:
-      - "9000:9000"
+      - "8000:80"
     environment:
-      SERVICE_NAME: api
-      SERVICE_TAGS: dev
-    working_dir: /var/www
+      APP_ENV: local
+      DB_CONNECTION: mysql
     volumes:
-      - ./api/:/var/www
-      - ./api/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+      - ./api:/var/www/laravel
     networks:
       - app-network
     depends_on:
@@ -40,20 +38,20 @@ services:
       - api
 
   #Nginx Service
-  webserver:
-    image: nginx:1.21
-    container_name: webserver
-    restart: unless-stopped
-    tty: true
-    links:
-      - api
-    ports:
-      - "80:80"
-    volumes:
-      - ./api/:/var/www
-      - ./api/nginx/conf.d/:/etc/nginx/conf.d/
-    networks:
-      - app-network
+  # webserver:
+  #   image: nginx:1.21
+  #   container_name: webserver
+  #   restart: unless-stopped
+  #   tty: true
+  #   links:
+  #     - api
+  #   ports:
+  #     - "80:80"
+  #   volumes:
+  #     - ./api/:/var/www
+  #     - ./api/nginx/conf.d/:/etc/nginx/conf.d/
+  #   networks:
+  #     - app-network
 
   #MySQL Service
   db:

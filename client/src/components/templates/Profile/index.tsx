@@ -10,9 +10,21 @@ import { GoogleIcon } from '~/shared/icons/GoogleIcon'
 import { fadeInUp, stagger } from '~/shared/animation'
 import { LinkedinIcon } from '~/shared/icons/LinkedinIcon'
 import { resumeDetails } from '~/shared/json/resumeDetails'
+import { useAuth } from '~/shared/hooks/useAuth'
 
 const Profile = () => {
   const router = useRouter()
+  const { handleCheckAuth } = useAuth()
+  const { isLoading, isError } = handleCheckAuth()
+  const handleResumeClick = () => {
+    if (isLoading && !isError) {
+      return null
+    } else if (!isLoading && !isError) {
+      alert('Downloading...')
+    } else {
+      router.push(`${process.env.NEXT_PUBLIC_API_ORIGIN}/api/redirect`)
+    }
+  }
   return (
     <motion.div
       variants={stagger}
@@ -50,10 +62,29 @@ const Profile = () => {
         </motion.div>
 
         <motion.div variants={fadeInUp} className="w-full px-5">
-          <button className="mx-auto flex w-full items-center justify-center rounded-lg border-2 border-gray-300 bg-gray-200 p-2 px-3 text-sm hover:bg-gray-300">
-            <Download className="mr-2 h-4 w-4" />
-            Download Resume
-          </button>
+          <>
+            <button
+              disabled={isLoading && !isError}
+              onClick={handleResumeClick}
+              className={`mx-auto flex w-full items-center justify-center rounded-lg border-2 border-gray-300 bg-gray-200 p-2 px-3  ${
+                !isLoading && isError ? 'text-xs' : 'text-sm'
+              } hover:bg-gray-300`}
+            >
+              {isLoading && !isError ? (
+                'Loading...'
+              ) : !isLoading && !isError ? (
+                <>
+                  <Download className="mr-2 h-4 w-4" />
+                  Download Resume
+                </>
+              ) : (
+                <>
+                  <GoogleIcon className="mr-2 h-4 w-4" />
+                  Sign in to download resume
+                </>
+              )}
+            </button>
+          </>
         </motion.div>
         <div className="flex w-full flex-col space-y-2 px-5 text-sm">
           <motion.div variants={fadeInUp} className="flex items-center space-x-2">

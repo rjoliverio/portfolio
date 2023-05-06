@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
-import type { NextPage } from 'next'
+import type { GetServerSideProps, NextPage } from 'next'
 import { useRouter } from 'next/router'
 
 import Layout from '~/components/templates/Layout'
@@ -23,7 +23,7 @@ const Home: NextPage = () => {
   const router = useRouter()
   return (
     <Layout metaTitle="Rj Oliverio | Home">
-      <section className="h-full w-full">
+      <section className="h-full w-full z-10">
         <MotionDiv variants={routeAnimation} initial="initial" animate="animate" exit="exit">
           <div className="mx-auto flex max-w-5xl items-center justify-center space-x-5 lg:justify-between ">
             <div className="flex flex-col text-left text-gray-500">
@@ -150,5 +150,16 @@ const Home: NextPage = () => {
     </Layout>
   )
 }
-
+export const getServerSideProps: GetServerSideProps = async ({ res, query }) => {
+  if (query.access_token) {
+    res.setHeader('Set-Cookie', `access_token=${query.access_token}`)
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/about',
+      },
+    }
+  }
+  return { props: {} }
+}
 export default Home
