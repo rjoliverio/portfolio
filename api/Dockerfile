@@ -1,50 +1,42 @@
-FROM php:8.1-fpm
+FROM php:8.1-apache
 
-# Copy composer.lock and composer.json
-COPY composer.lock composer.json /var/www/
+WORKDIR /var/www/laravel
 
-# Set working directory
-WORKDIR /var/www
+RUN curl -o /usr/local/bin/composer https://getcomposer.org/download/latest-stable/composer.phar \
+    && chmod +x /usr/local/bin/composer
 
-# Install dependencies
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    libpng-dev \
-    libjpeg62-turbo-dev \
-    libfreetype6-dev \
-    locales \
-    zip \
-    jpegoptim optipng pngquant gifsicle \
-    vim \
+# hadolint ignore=DL3008
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y \
+    cron \
+    icu-devtools \
+    jq \
+    libfreetype6-dev libicu-dev libjpeg62-turbo-dev libpng-dev libpq-dev \
+    libsasl2-dev libssl-dev libwebp-dev libxpm-dev libzip-dev libzstd-dev \
     unzip \
-    git \
-    curl \
-    libzip-dev
+    zlib1g-dev \
+    && apt-get clean \
+    && apt-get autoclean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Clear cache
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+# hadolint ignore=DL3059
+RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini \
+    && pecl install --configureoptions='enable-redis-igbinary="yes" enable-redis-lzf="yes" enable-redis-zstd="yes"' igbinary zstd redis \
+    && pecl clear-cache \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp --with-xpm \
+    && docker-php-ext-install gd intl pdo_mysql pdo_pgsql zip \
+    && docker-php-ext-enable igbinary opcache redis zstd
 
-# Install extensions
-RUN docker-php-ext-install pdo_mysql zip exif pcntl
-RUN docker-php-ext-configure gd --enable-gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/
-RUN docker-php-ext-install gd
+COPY composer.json composer.lock ./
+RUN composer install --no-autoloader --no-scripts --no-dev
 
-# Install composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+COPY docker/ /
+RUN a2enmod rewrite headers \
+    && a2ensite laravel \
+    && a2dissite 000-default \
+    && chmod +x /usr/local/bin/docker-laravel-entrypoint
 
-# Add user for laravel application
-RUN groupadd -g 1000 www
-RUN useradd -u 1000 -ms /bin/bash -g www www
+COPY . /var/www/laravel
+RUN composer install --optimize-autoloader --no-dev
 
-# Copy existing application directory contents
-COPY . /var/www
-
-# Copy existing application directory permissions
-COPY --chown=www:www . /var/www
-
-# Change current user to www
-USER www
-
-# Expose port 9000 and start php-fpm server
-EXPOSE 9000
-CMD ["php-fpm"]
+CMD ["docker-laravel-entrypoint"]
