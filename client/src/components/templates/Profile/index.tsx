@@ -16,11 +16,18 @@ const Profile = () => {
   const router = useRouter()
   const { handleCheckAuth } = useAuth()
   const { isLoading, isError } = handleCheckAuth()
+  const handleDownloadResume = () => {
+    const anchorElement = document.createElement('a')
+    anchorElement.href = '/portfolio/pj_rj_oliverio_resume.pdf'
+    anchorElement.download = `RESUME_OLIVERIO.pdf`
+    anchorElement.click()
+    anchorElement.remove()
+  }
   const handleResumeClick = () => {
     if (isLoading && !isError) {
       return null
     } else if (!isLoading && !isError) {
-      alert('Downloading...')
+      handleDownloadResume()
     } else {
       router.push(`${process.env.NEXT_PUBLIC_API_ORIGIN}/api/redirect`)
     }
