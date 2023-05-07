@@ -33,17 +33,20 @@ CLIENT SETUP
 3. Fill nescessary environment variables
 4. Run `yarn` to install dependencies
 5. Run `yarn dev` to serve the client
-6. Open `http://localhost:3000` to view the app
-   API SETUP
-7. `cd api`
-8. `cp .env.example .env`
-9. Fill nescessary environment variables
-10. Run `composer install` to install dependencies
-11. Run `php artisan key:generate` to generate app key
-12. Run `php artisan migrate` to migrate tables
-13. Run `php artisan serve` to serve the api
-14. Open `http://localhost:8000` to check the server
-    DB SETUP
+6. Open `http://localhost:3000` to view the app/
+
+API SETUP
+
+1. `cd api`
+2. `cp .env.example .env`
+3. Fill nescessary environment variables
+4. Run `composer install` to install dependencies
+5. Run `php artisan key:generate` to generate app key
+6. Run `php artisan migrate` to migrate tables
+7. Run `php artisan serve` to serve the api
+8. Open `http://localhost:8000` to check the server/
+
+DB SETUP
 
 - This is up to your preference. You may use XAMPP MySQL Server and just update your .env with the database credentials used.
 
