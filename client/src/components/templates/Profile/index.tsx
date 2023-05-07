@@ -11,15 +11,21 @@ import { fadeInUp, stagger } from '~/shared/animation'
 import { LinkedinIcon } from '~/shared/icons/LinkedinIcon'
 import { resumeDetails } from '~/shared/json/resumeDetails'
 import { useAuth } from '~/shared/hooks/useAuth'
+import { client } from '~/shared/lib/client'
 
 const Profile = () => {
   const router = useRouter()
   const { handleCheckAuth } = useAuth()
   const { isLoading, isError } = handleCheckAuth()
-  const handleDownloadResume = () => {
+  const handleDownloadResume = async () => {
+    const res = await client.get('/portfolio/pj_rj_oliverio_resume.pdf', {
+      baseURL: process.env.NEXT_PUBLIC_CLIENT_ORIGIN,
+      responseType: 'blob',
+    })
+    const url = window.URL.createObjectURL(res.data)
     const anchorElement = document.createElement('a')
-    anchorElement.href = '/portfolio/pj_rj_oliverio_resume.pdf'
-    anchorElement.download = `RESUME_OLIVERIO.pdf`
+    anchorElement.href = url
+    anchorElement.download = 'RESUME_OLIVERIO.pdf'
     anchorElement.click()
     anchorElement.remove()
   }
