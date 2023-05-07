@@ -33,7 +33,7 @@ CLIENT SETUP
 3. Fill nescessary environment variables
 4. Run `yarn` to install dependencies
 5. Run `yarn dev` to serve the client
-6. Open `http://localhost:3000` to view the app/
+6. Open `http://localhost:3000` to view the app
 
 API SETUP
 
@@ -44,7 +44,7 @@ API SETUP
 5. Run `php artisan key:generate` to generate app key
 6. Run `php artisan migrate` to migrate tables
 7. Run `php artisan serve` to serve the api
-8. Open `http://localhost:8000` to check the server/
+8. Open `http://localhost:8000` to check the server
 
 DB SETUP
 
