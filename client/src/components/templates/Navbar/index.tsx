@@ -15,7 +15,7 @@ const Navbar = () => {
   const { mutate: signOut } = handleAuthSignout()
   return (
     <nav>
-      <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between py-2 px-5 md:p-0 md:px-5 lg:px-2">
+      <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between px-5 py-2 md:p-0 md:px-5 lg:px-2">
         <Link href="/" className="hidden items-center md:flex">
           <Image
             src="/images/rj-logo-4.png"
@@ -134,12 +134,37 @@ const Navbar = () => {
                             link.path === '/about'
                           ? 'bg-amber-400 text-white'
                           : 'bg-gray-100'
-                      } group  flex w-full max-w-7xl items-center rounded-md px-5 py-2 text-sm font-medium hover:bg-amber-200`}
+                      } group flex w-full max-w-7xl items-center rounded-md px-5 py-2 text-sm font-medium hover:bg-amber-200`}
                     >
                       {link.name}
                     </Link>
                   </Menu.Item>
                 ))}
+                {Boolean(user) && (
+                  <Menu.Item>
+                    <div
+                      onClick={() => signOut()}
+                      className="flex flex-row items-center justify-between space-x-3 rounded-md bg-gray-100 px-5 py-2"
+                    >
+                      <div className="flex flex-row items-center space-x-3">
+                        <Image
+                          className="h-8 w-8 rounded-full border border-gray-300"
+                          width={32}
+                          height={32}
+                          src={user?.avatar as string}
+                          alt="User dropdown"
+                        />
+                        <div className="flex flex-col text-xs">
+                          <p className="font-semibold">{user?.name}</p>
+                          <p>{user?.email}</p>
+                        </div>
+                      </div>
+                      <p className="flex items-center justify-center space-x-1 rounded-md  text-gray-700 ">
+                        <LogOut className="h-5 w-5" />
+                      </p>
+                    </div>
+                  </Menu.Item>
+                )}
               </div>
             </Menu.Items>
           </Transition>
