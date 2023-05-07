@@ -1,4 +1,4 @@
-![Yellow Modern SEO Tutorial Youtube Thumbnail (850 × 480 px) (850 × 312 px)](https://user-images.githubusercontent.com/110364637/236683642-58daa9d8-b1ec-492f-9182-62ccbd131404.jpg)
+![Yellow Modern SEO Tutorial Youtube Thumbnail (850 × 480 px) (850 × 312 px)](https://user-images.githubusercontent.com/110364637/236683994-ffe1795e-e957-4c2c-b60e-04937c342d88.png)
 
 ## Description
 
