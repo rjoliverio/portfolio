@@ -1,0 +1,57 @@
+repos:
+  # BE Pre-commit
+  - repo: https://github.com/digitalpulp/pre-commit-php.git
+    rev: 1.4.0
+    hooks:
+      - id: php-lint-all
+        files: ^api
+      - id: php-unit
+        files: ^api
+  - repo: local
+    hooks:
+      - id: php-cs-fixer
+        name: php-cs-fixer
+        entry: api/vendor/bin/php-cs-fixer fix --config=./api/.php-cs-fixer.php --diff --verbose --using-cache=no
+        files: ^api/.*\.(php)$
+        exclude: '^api/\.php-cs-fixer\.cache$'
+        language: script
+  - repo: https://github.com/pre-commit/pre-commit-hooks.git
+    rev: v4.3.0
+    hooks:
+      - id: detect-private-key
+        files: ^api
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+  # FE Pre-commit
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v2.7.1
+    hooks:
+      - id: prettier
+        files: ^client/src/.*\.(ts|tsx|js|css|html|json)$
+        args:
+          [
+            "--config=./client/.prettierrc",
+            "--ignore-path=./client/.prettierignore",
+          ]
+  - repo: https://github.com/pre-commit/mirrors-eslint
+    rev: "v8.33.0"
+    hooks:
+      - id: eslint
+        additional_dependencies:
+          - eslint
+          - eslint-config-react-app
+          - typescript
+          - "@typescript-eslint/parser"
+          - "@typescript-eslint/eslint-plugin"
+          - eslint-config-prettier
+          - eslint-plugin-jsx-a11y
+          - eslint-plugin-prettier
+          - eslint-plugin-react
+          - eslint-plugin-react-hooks
+        files: ^client/src/.*\.[jt]sx?$
+        types: [file]
+        args:
+          [
+            "--config=./client/.eslintrc.json",
+            "--ignore-path=./client/.eslintignore",
+          ]
