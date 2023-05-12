@@ -6,7 +6,10 @@ $finder = PhpCsFixer\Finder::create()
 
 $config = new PhpCsFixer\Config();
 return $config->setRules([
-    '@PSR12' => true,
+    '@PSR2' => true,
+    'curly_braces_position' => [
+        'anonymous_classes_opening_brace' => 'next_line_unless_newline_at_signature_end',
+    ],
     'array_syntax' => ['syntax' => 'short'],
     'no_unused_imports' => true,
 ])
