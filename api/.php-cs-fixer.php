@@ -12,7 +12,7 @@ return $config->setRules([
     ],
     'array_syntax' => ['syntax' => 'short'],
     'no_unused_imports' => true,
-    'no_extra_blank_lines' => ['tokens' => ['attribute', 'break', 'case', 'continue', 'curly_brace_block', 'default', 'extra', 'parenthesis_brace_block', 'return', 'switch', 'throw', 'use']],
+    'no_extra_blank_lines' => ['tokens' => ['attribute', 'break', 'case', 'continue', 'curly_brace_block', 'default', 'extra', 'parenthesis_brace_block', 'switch', 'throw', 'use']],
     'method_chaining_indentation' => true
 ])
     ->setFinder($finder);
