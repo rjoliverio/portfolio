@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
@@ -12,8 +12,12 @@ import { LinkedinIcon } from '~/shared/icons/LinkedinIcon'
 import { resumeDetails } from '~/shared/json/resumeDetails'
 import { useAuth } from '~/shared/hooks/useAuth'
 import { client } from '~/shared/lib/client'
+import LoadingIcon from '~/shared/icons/LoadingIcon'
+import createPersistedState from 'use-persisted-state'
 
 const Profile = () => {
+  const useCounterState = createPersistedState('resumeLoadCount')
+  const [count, setCount] = useCounterState()
   const router = useRouter()
   const { handleCheckAuth } = useAuth()
   const { isLoading, isError } = handleCheckAuth()
@@ -28,6 +32,7 @@ const Profile = () => {
     anchorElement.download = 'RESUME_OLIVERIO.pdf'
     anchorElement.click()
     anchorElement.remove()
+    setCount(5)
   }
   const handleResumeClick = () => {
     if (isLoading && !isError) {
@@ -38,6 +43,17 @@ const Profile = () => {
       router.push(`${process.env.NEXT_PUBLIC_API_ORIGIN}/api/redirect`)
     }
   }
+
+  useEffect(() => {
+    let interval: string | number | NodeJS.Timeout | undefined
+    if ((count as number) > 0) {
+      interval = setInterval(() => {
+        setCount((prevCount: number) => prevCount - 1)
+      }, 1000)
+    }
+    return () => clearInterval(interval)
+  }, [count])
+
   return (
     <motion.div
       variants={stagger}
@@ -77,17 +93,26 @@ const Profile = () => {
         <motion.div variants={fadeInUp} className="w-full px-5">
           <>
             <button
-              disabled={isLoading && !isError}
+              disabled={(isLoading && !isError) || Boolean(count)}
               onClick={handleResumeClick}
               className={`mx-auto flex w-full items-center justify-center rounded-lg border-2 border-gray-300 bg-gray-200 p-2 px-3  ${
                 !isLoading && isError ? 'text-xs' : 'text-sm'
               } hover:bg-gray-300`}
             >
               {isLoading && !isError ? (
-                'Loading...'
+                <>
+                  <LoadingIcon className="mr-2 h-4 w-4 fill-cyan-500 text-gray-400" />
+                  Loading...
+                </>
               ) : !isLoading && !isError ? (
                 <>
-                  <Download className="mr-2 h-4 w-4" />
+                  {Boolean(count) ? (
+                    <span className="mr-2 h-5 w-5 rounded-full bg-cyan-500 p-0.5 text-xs text-white">
+                      {count as number}
+                    </span>
+                  ) : (
+                    <Download className="mr-2 h-4 w-4" />
+                  )}
                   Download Resume
                 </>
               ) : (

@@ -4,7 +4,9 @@ import 'react-tooltip/dist/react-tooltip.css'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 import '@/shared/css/globals.css'
+import 'react-toastify/dist/ReactToastify.css'
 import NextProgress from '~/shared/lib/next-progress'
+import { ToastContainer } from 'react-toastify'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -21,6 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <NextProgress />
       <Component {...pageProps} />
+      <ToastContainer position="top-center" />
     </QueryClientProvider>
   )
 }
