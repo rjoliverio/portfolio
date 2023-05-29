@@ -1,22 +1,58 @@
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import type { NextPage } from 'next'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { Mail, MapPin, Phone, Send } from 'react-feather'
+import createPersistedState from 'use-persisted-state'
 
 import { fadeInUp, routeAnimation, stagger } from '~/shared/animation'
 import Layout from '~/components/templates/Layout'
 import { GithubIcon } from '~/shared/icons/GithubIcon'
 import { GoogleIcon } from '~/shared/icons/GoogleIcon'
+import { IContact } from '~/shared/interface/IContact'
 import { LinkedinIcon } from '~/shared/icons/LinkedinIcon'
 import { resumeDetails } from '~/shared/json/resumeDetails'
+import { ContactUsSchema } from '~/shared/validations/ContactUsSchema'
+import { useContact } from '~/shared/hooks/useContact'
+import LoadingIcon from '~/shared/icons/LoadingIcon'
 
 const MotionDiv = dynamic(() => import('framer-motion').then((module) => module.motion.div), {
   ssr: false,
 })
 
 const Contact: NextPage = () => {
+  const useCounterState = createPersistedState('contactLoadCount')
+  const [count, setCount] = useCounterState()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<IContact>({
+    resolver: yupResolver(ContactUsSchema),
+  })
+  const { handleSendMessage } = useContact()
+  const { mutate, isLoading, isSuccess } = handleSendMessage(reset)
+  const onSubmit = async (data: IContact) => {
+    mutate(data)
+  }
   const [contactType, setContactType] = useState<string>('location')
+
+  useEffect(() => {
+    let interval: string | number | NodeJS.Timeout | undefined
+    if ((count as number) > 0) {
+      interval = setInterval(() => {
+        setCount((prevCount: number) => prevCount - 1)
+      }, 1000)
+    }
+    return () => clearInterval(interval)
+  }, [count])
+  useEffect(() => {
+    if (isSuccess) setCount(5)
+  }, [isSuccess])
+
   return (
     <Layout metaTitle="Rj Oliverio | Contact Us">
       <section className="z-10 h-full w-full">
@@ -151,59 +187,89 @@ const Contact: NextPage = () => {
           </MotionDiv>
           <MotionDiv
             variants={fadeInUp}
-            className="flex w-full max-w-md flex-col space-y-6 rounded-lg border bg-gray-100 p-5 py-8 shadow-lg"
+            className="w-full max-w-md rounded-lg border bg-gray-100  shadow-lg"
           >
-            <div className="w-full text-left">
-              <label
-                htmlFor="default-input"
-                className="mb-2 block text-sm font-medium text-gray-700"
-              >
-                Name
-              </label>
-              <input
-                type="text"
-                placeholder="Your Name"
-                id="default-input"
-                className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
-              />
-            </div>
-            <div className="w-full text-left">
-              <label
-                htmlFor="default-input"
-                className="mb-2 block text-sm font-medium text-gray-700"
-              >
-                Email
-              </label>
-              <input
-                type="email"
-                placeholder="Your Email"
-                id="default-input"
-                className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
-              />
-            </div>
-            <div className="w-full text-left">
-              <label
-                htmlFor="default-input"
-                className="mb-2 block text-sm font-medium text-gray-700"
-              >
-                Message
-              </label>
-              <textarea
-                id="message"
-                rows={4}
-                className="block w-full resize-none rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
-                placeholder="Write your message here..."
-              ></textarea>
-            </div>
-            <div className="flex w-full flex-row-reverse">
-              <button
-                type="button"
-                className="flex items-center space-x-1 rounded-lg bg-amber-400 px-3 py-2.5 text-sm font-medium text-white shadow-md transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-4 focus:ring-amber-300"
-              >
-                <Send className="h-4 w-4" />
-                <span>Send Message</span>
-              </button>
-            </div>
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="flex w-full flex-col space-y-6 rounded-lg p-5 py-8"
+            >
+              <div className="w-full text-left">
+                <label htmlFor="email" className="mb-2 block text-sm font-medium text-gray-700">
+                  Email
+                </label>
+                <input
+                  {...register('email')}
+                  type="email"
+                  placeholder="Your Email"
+                  id="email"
+                  className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+                />
+                {errors.email && (
+                  <label htmlFor="email" className="mt-1 block text-xs text-gray-700 ">
+                    <span className="text-rose-500">{errors.email.message}</span>
+                  </label>
+                )}
+              </div>
+              <div className="w-full text-left">
+                <label htmlFor="subject" className="mb-2 block text-sm font-medium text-gray-700">
+                  Subject
+                </label>
+                <input
+                  {...register('subject')}
+                  type="text"
+                  placeholder="Enter subject"
+                  id="subject"
+                  className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+                />
+                {errors.subject && (
+                  <label htmlFor="subject" className="mt-1 block text-xs text-gray-700 ">
+                    <span className="text-rose-500">{errors.subject.message}</span>
+                  </label>
+                )}
+              </div>
+              <div className="w-full text-left">
+                <label htmlFor="message" className="mb-2 block text-sm font-medium text-gray-700">
+                  Message
+                </label>
+                <textarea
+                  {...register('message')}
+                  id="message"
+                  rows={4}
+                  className="block w-full resize-none rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+                  placeholder="Write your message here..."
+                ></textarea>
+                {errors.subject && (
+                  <label htmlFor="message" className="mt-1 block text-xs text-gray-700 ">
+                    <span className="text-rose-500">{errors.message?.message}</span>
+                  </label>
+                )}
+              </div>
+              <div className="flex w-full flex-row-reverse">
+                <button
+                  type="submit"
+                  disabled={isLoading || Boolean(count)}
+                  className="flex items-center space-x-1 rounded-lg bg-amber-400 px-3 py-2.5 text-sm font-medium text-white shadow-md transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-4 focus:ring-amber-300 disabled:bg-gray-400"
+                >
+                  {isLoading ? (
+                    <>
+                      <LoadingIcon className="h-4 w-4 fill-amber-400 text-gray-200" />
+                      <span>Send Message</span>
+                    </>
+                  ) : (
+                    <>
+                      {Boolean(count) ? (
+                        <span className="h-5 w-5 rounded-full bg-amber-400 p-0.5 text-xs text-white">
+                          {count as number}
+                        </span>
+                      ) : (
+                        <Send className="h-4 w-4" />
+                      )}
+                      <span>Send Message</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </form>
           </MotionDiv>
         </MotionDiv>
       </section>

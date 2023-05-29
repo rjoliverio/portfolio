@@ -19,6 +19,24 @@ services:
     depends_on:
       - db
 
+  #Background Worker Service
+  worker:
+    build:
+      context: ./api
+    container_name: worker
+    restart: unless-stopped
+    environment:
+      APP_ENV: local
+      DB_CONNECTION: mysql
+      CONTAINER_ROLE: queue
+    volumes:
+      - ./api:/var/www/laravel
+    networks:
+      - app-network
+    depends_on:
+      - db
+      - api
+
   #NextJS Service
   client:
     build:
@@ -58,14 +76,11 @@ services:
     image: mysql:5
     container_name: db
     restart: unless-stopped
-    tty: true
     ports:
       - "3306:3306"
     environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
       MYSQL_DATABASE: portfolio
-      MYSQL_ROOT_PASSWORD: password
-      SERVICE_TAGS: dev
-      SERVICE_NAME: mysql
     volumes:
       - dbdata:/var/lib/mysql/
       - ./api/mysql/my.cnf:/etc/mysql/my.cnf
