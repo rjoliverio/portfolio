@@ -21,6 +21,9 @@ jobs:
         image: mysql:5
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: laravel
+        ports:
+          - 3306:3306
     steps:
       - uses: shivammathur/setup-php@v2
         with:
@@ -34,6 +37,8 @@ jobs:
         run: cd api && composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
       - name: Composer Generate Key
         run: cd api && php artisan key:generate
+      - name: Migrate DB
+        run: cd api && php artisan migrate
       - name: Run Code Checker
         run: cd api && ./vendor/bin/php-cs-fixer fix ./app ./config ./database ./routes ./tests --config=./.php-cs-fixer.php --diff --dry-run --using-cache=no
       - name: Execute tests (Unit and Feature tests) via PHPUnits
