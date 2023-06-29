@@ -4,7 +4,7 @@ import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
-import { Globe, Monitor } from 'react-feather'
+import { Globe, Monitor, Tag } from 'react-feather'
 import { Tooltip } from 'react-tooltip'
 
 import Layout from '~/components/templates/Layout'
@@ -55,8 +55,8 @@ const PortfolioDetails: NextPage = () => {
                   data-tooltip-content="Development Period"
                   data-tooltip-place="right"
                 >
-                  {moment(project?.start_date as string).format('MMMM d, YYYY')} -{' '}
-                  {moment(project?.finished_date as string).format('MMMM d, YYYY')}
+                  {moment(project?.start_date as string).format('MMMM DD, YYYY')} -{' '}
+                  {moment(project?.finished_date as string).format('MMMM DD, YYYY')}
                 </span>
               </div>
             </div>
@@ -84,6 +84,10 @@ const PortfolioDetails: NextPage = () => {
             </div>
           </div>
           <div className="w-full text-left">{project?.description}</div>
+          <div className="flex w-full items-center space-x-2 text-xs text-gray-600">
+            <Tag className="h-4 w-4" />
+            <span>{project?.technologies.join(', ')}</span>
+          </div>
           <div className="rounded-lg border bg-white p-2 shadow-md">
             <Image
               src={project?.image as string}

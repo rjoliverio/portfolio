@@ -52,8 +52,8 @@ const Navbar = () => {
                   </li>
                 ))}
               </ul>
-              <Menu.Button className="inline-flex w-full justify-center rounded-full border-2 border-gray-300 text-sm font-medium text-gray-500 hover:bg-gray-300 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
-                {Boolean(user) && (
+              {Boolean(user) && (
+                <Menu.Button className="inline-flex w-full justify-center rounded-full border-2 border-gray-300 text-sm font-medium text-gray-500 hover:bg-gray-300 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
                   <Image
                     className="h-8 w-8 rounded-full "
                     width={32}
@@ -61,8 +61,8 @@ const Navbar = () => {
                     src={user?.avatar as string}
                     alt="User dropdown"
                   />
-                )}
-              </Menu.Button>
+                </Menu.Button>
+              )}
             </div>
             <Transition
               as={Fragment}
