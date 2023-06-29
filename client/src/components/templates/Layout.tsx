@@ -15,7 +15,7 @@ const Layout: FC<Props> = ({ metaTitle, children }): JSX.Element => {
   const [navBg, setNavBg] = useState(false)
 
   const changeNavBg = () => {
-    window.scrollY >= 80 ? setNavBg(true) : setNavBg(false)
+    window.scrollY >= 20 ? setNavBg(true) : setNavBg(false)
   }
 
   useEffect(() => {
@@ -25,15 +25,21 @@ const Layout: FC<Props> = ({ metaTitle, children }): JSX.Element => {
     }
   }, [])
   return (
-    <div className="flex h-full min-h-screen flex-col bg-gray-50 antialiased">
+    <div className="relative flex h-full min-h-screen flex-col bg-gray-50 antialiased">
       <Head>
         <title>{metaTitle}</title>
       </Head>
-      <div className="absolute inset-0 block bg-[url('/images/shapes-bg.svg')] bg-center"></div>
+      <div
+        className={`absolute inset-0 block ${
+          router.pathname.includes('contact') || router.pathname.includes('portfolio')
+            ? "bg-[url('/images/shapes-bg-down.svg')]"
+            : "bg-[url('/images/shapes-bg-up.svg')]"
+        } bg-cover  bg-fixed bg-center`}
+      ></div>
       <header
-        className={`sticky top-0 z-50 w-full bg-gray-50 backdrop-blur-md  ${
+        className={`sticky top-0 z-50 w-full bg-transparent  ${
           navBg
-            ? 'bg-white/60 drop-shadow-md transition duration-300 ease-in-out'
+            ? 'bg-white/60 drop-shadow-md backdrop-blur-md transition duration-300 ease-in-out'
             : ' bg-gray-50 drop-shadow-none'
         }`}
       >

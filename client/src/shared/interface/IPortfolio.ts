@@ -3,6 +3,7 @@ export interface IPortfolio {
   title: string
   description: string
   image: string
+  technologies: Array<string>
   github_link: ILink
   output_link: ILink
   start_date: string
