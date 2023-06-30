@@ -8,6 +8,7 @@ import Layout from '~/components/templates/Layout'
 import { fadeInUp, routeAnimation, stagger } from '~/shared/animation'
 import Link from 'next/link'
 import { resumeDetails } from '~/shared/json/resumeDetails'
+import moment from 'moment'
 
 const MotionDiv = dynamic(() => import('framer-motion').then((module) => module.motion.div), {
   ssr: false,
@@ -23,7 +24,7 @@ const Home: NextPage = () => {
   const router = useRouter()
   return (
     <Layout metaTitle="Rj Oliverio | Home">
-      <section className="h-full w-full z-10">
+      <section className="z-10 h-full w-full">
         <MotionDiv variants={routeAnimation} initial="initial" animate="animate" exit="exit">
           <div className="mx-auto flex max-w-5xl items-center justify-center space-x-5 lg:justify-between ">
             <div className="flex flex-col text-left text-gray-500">
@@ -63,7 +64,7 @@ const Home: NextPage = () => {
             >
               <MotionDiv variants={fadeInUp} className="z-20">
                 <Link href={resumeDetails.socials.github} passHref>
-                  <div className="relative mt-2 ml-32 h-[60px] w-[60px] rotate-6 rounded-lg bg-white shadow-lg  transition-all duration-300 hover:scale-110 ">
+                  <div className="relative ml-32 mt-2 h-[60px] w-[60px] rotate-6 rounded-lg bg-white shadow-lg  transition-all duration-300 hover:scale-110 ">
                     <Image
                       src="/images/github-logo.svg"
                       className="absolute inset-0 m-auto h-[50px] w-[50px] object-contain object-center"
@@ -79,7 +80,7 @@ const Home: NextPage = () => {
 
               <MotionDiv variants={fadeInUp} className="absolute top-40 z-20">
                 <Link href={resumeDetails.socials.linkedin} passHref>
-                  <div className="relative mt-2 ml-24 h-[45px] w-[45px] -rotate-6 rounded-lg bg-white shadow-lg transition-all duration-300 hover:scale-110 ">
+                  <div className="relative ml-24 mt-2 h-[45px] w-[45px] -rotate-6 rounded-lg bg-white shadow-lg transition-all duration-300 hover:scale-110 ">
                     <Image
                       src="/images/linkedin-logo.svg"
                       className="absolute inset-0 m-auto h-[35px] w-[35px] object-contain object-center"
@@ -93,7 +94,7 @@ const Home: NextPage = () => {
                 </Link>
               </MotionDiv>
 
-              <MotionDiv variants={fadeInUp} className="absolute top-32 right-20 z-20">
+              <MotionDiv variants={fadeInUp} className="absolute right-20 top-32 z-20">
                 <Link
                   href={`https://mail.google.com/mail/?view=cm&fs=1&to=${resumeDetails.socials.gmail}`}
                   passHref
@@ -126,7 +127,7 @@ const Home: NextPage = () => {
               </MotionDiv>
               <Image
                 src="/images/circle-dot.svg"
-                className="absolute top-0 left-16 right-0 w-60 object-contain object-center"
+                className="absolute left-16 right-0 top-0 w-60 object-contain object-center"
                 alt="circle dot"
                 blurDataURL="/images/circle-dot.svg"
                 width={240}
@@ -152,7 +153,12 @@ const Home: NextPage = () => {
 }
 export const getServerSideProps: GetServerSideProps = async ({ res, query }) => {
   if (query.access_token) {
-    res.setHeader('Set-Cookie', `access_token=${query.access_token}`)
+    res.setHeader(
+      'Set-Cookie',
+      `access_token=${query.access_token}; Expires=${new Date(
+        moment().add(1, 'y').toISOString()
+      ).toUTCString()}`
+    )
     return {
       redirect: {
         permanent: false,
