@@ -28,7 +28,7 @@ RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini \
     && docker-php-ext-enable igbinary opcache redis zstd
 
 COPY composer.json composer.lock ./
-RUN composer install --no-autoloader --no-scripts --no-dev
+RUN composer install --no-autoloader --no-scripts --no-dev --ignore-platform-reqs
 
 COPY docker/ /
 RUN a2enmod rewrite headers \
@@ -37,6 +37,6 @@ RUN a2enmod rewrite headers \
     && chmod +x /usr/local/bin/docker-laravel-entrypoint
 
 COPY . /var/www/laravel
-RUN composer install --optimize-autoloader --no-dev
+RUN composer install --optimize-autoloader --no-dev --ignore-platform-reqs
 
 CMD ["docker-laravel-entrypoint"]
