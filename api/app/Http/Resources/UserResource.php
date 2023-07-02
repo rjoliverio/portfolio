@@ -19,6 +19,9 @@ class UserResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'avatar' => $this->avatar,
+            'roles' => collect($this->roles)->map(function ($role) {
+                return $role['name'];
+            }),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

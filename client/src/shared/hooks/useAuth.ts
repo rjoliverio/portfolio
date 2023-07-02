@@ -23,7 +23,7 @@ const useAuth = () => {
       queryKey: ['CHECK_AUTH'],
       queryFn: async () => (await client.get('/api/auth')).data,
       enabled: true,
-      select: (data: { data: IUser }) => data.data,
+      select: (data: IUser) => data,
     })
 
   const handleAuthSignout = () =>

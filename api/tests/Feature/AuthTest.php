@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Enums\RoleEnum;
+use App\Models\Role;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Socialite\Facades\Socialite;
 use Mockery;
@@ -24,6 +26,7 @@ class AuthTest extends TestCase
 
     public function test_sign_in_to_google_callback(): void
     {
+        Role::updateOrCreate(['id' => RoleEnum::GUEST->value, 'name' => "guest"]);
         $abstractUser = Mockery::mock('Laravel\Socialite\Two\User');
         $abstractUser->email = 'rjoliverio@test.com';
         $abstractUser->name = 'Rj Oliverio';

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\PortfolioController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +16,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::apiResource('contact_us', ContactUsController::class);
+Route::apiResource('portfolio', PortfolioController::class);
 require __DIR__ . '/auth.php';
