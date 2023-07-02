@@ -2,6 +2,8 @@
 
 namespace Tests\Support;
 
+use App\Enums\RoleEnum;
+use App\Models\Role;
 use App\Models\User;
 use Laravel\Sanctum\Sanctum;
 
@@ -18,6 +20,7 @@ trait AuthTrait
     }
     public function createUser()
     {
+        Role::updateOrCreate(['id' => RoleEnum::GUEST->value, 'name' => 'guest']);
         return User::factory()->create();
     }
     public function createAuth($user)

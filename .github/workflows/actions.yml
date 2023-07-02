@@ -39,6 +39,8 @@ jobs:
         run: cd api && php artisan key:generate
       - name: Migrate DB
         run: cd api && php artisan migrate
+      - name: Seed DB
+        run: cd api && php artisan db:seed
       - name: Run Code Checker
         run: cd api && ./vendor/bin/php-cs-fixer fix ./app ./config ./database ./routes ./tests --config=./.php-cs-fixer.php --diff --dry-run --using-cache=no
       - name: Execute tests (Unit and Feature tests) via PHPUnits
