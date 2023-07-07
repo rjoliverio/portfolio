@@ -57,36 +57,22 @@ const Profile = () => {
   return (
     <motion.div
       variants={stagger}
-      className="z-10 my-auto flex h-full w-full max-w-none flex-1 flex-col  space-y-3 rounded-xl border bg-gray-100 px-5 py-8 shadow lg:max-w-xs"
+      className="z-10 my-auto flex h-full w-full max-w-none flex-1 flex-col  space-y-3 rounded-xl border bg-gray-100 px-5 py-5 shadow lg:max-w-xs"
     >
-      <motion.div
-        variants={fadeInUp}
-        className={`relative mx-auto h-52 w-52 rounded-full border-4 bg-white  ${
-          router.pathname.includes('skills') ? 'border-amber-400' : 'border-cyan-500'
-        }`}
-      >
+      <motion.div variants={fadeInUp} className={`relative mx-auto h-60 w-60 `}>
         <Image
-          src="/images/square-portrait.png"
-          className="absolute rounded-full object-cover"
+          src="/images/about-portrait.svg"
+          className="absolute scale-110"
           alt="Square Portrait"
           fill
-          blurDataURL="/images/square-portrait.png"
+          blurDataURL="/images/about-portrait.svg"
           placeholder="blur"
         />
       </motion.div>
       <div className="flex flex-col space-y-5">
         <motion.div variants={fadeInUp}>
-          <p className="text-2xl font-bold text-gray-700">
-            <span
-              className={`bg-gradient-to-r bg-clip-text text-transparent ${
-                router.pathname.includes('skills')
-                  ? 'from-yellow-400 to-amber-500'
-                  : 'from-cyan-500 to-blue-400'
-              }`}
-            >
-              {' '}
-              {`${resumeDetails.name.first_name} ${resumeDetails.name.last_name}`}
-            </span>
+          <p className="text-xl font-semibold text-gray-500">
+            {`${resumeDetails.name.first_name} ${resumeDetails.name.last_name}`}
           </p>
         </motion.div>
 
@@ -117,7 +103,7 @@ const Profile = () => {
                 </>
               ) : (
                 <>
-                  <GoogleIcon className="mr-2 h-4 w-4" />
+                  <GoogleIcon className="mr-2 h-5 w-5" />
                   Sign in to download resume
                 </>
               )}
@@ -146,7 +132,7 @@ const Profile = () => {
               className="cursor-pointer rounded-full border bg-white p-2 shadow"
             >
               <Link href={resumeDetails.socials.github} passHref>
-                <GithubIcon className="h-7 w-7" />
+                <GithubIcon className="h-6 w-6" />
               </Link>
             </motion.div>
             <motion.div
@@ -154,7 +140,7 @@ const Profile = () => {
               className="cursor-pointer rounded-full border bg-white p-2 shadow"
             >
               <Link href={resumeDetails.socials.linkedin} passHref>
-                <LinkedinIcon className="h-7 w-7" />
+                <LinkedinIcon className="h-6 w-6" />
               </Link>
             </motion.div>
             <motion.div
@@ -165,7 +151,7 @@ const Profile = () => {
                 href={`https://mail.google.com/mail/?view=cm&fs=1&to=${resumeDetails.socials.gmail}`}
                 passHref
               >
-                <GoogleIcon className="h-7 w-7" />
+                <GoogleIcon className="h-6 w-6" />
               </Link>
             </motion.div>
           </div>
