@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import React, { FC, ReactNode, useEffect, useState } from 'react'
+import React, { FC, ReactNode } from 'react'
 
 import Navbar from './Navbar'
 
@@ -12,18 +12,6 @@ type Props = {
 const Layout: FC<Props> = ({ metaTitle, children }): JSX.Element => {
   const router = useRouter()
 
-  const [navBg, setNavBg] = useState(false)
-
-  const changeNavBg = () => {
-    window.scrollY >= 20 ? setNavBg(true) : setNavBg(false)
-  }
-
-  useEffect(() => {
-    window.addEventListener('scroll', changeNavBg)
-    return () => {
-      window.removeEventListener('scroll', changeNavBg)
-    }
-  }, [])
   return (
     <div className="relative flex h-full min-h-screen flex-col bg-gray-50 antialiased">
       <Head>
@@ -31,17 +19,12 @@ const Layout: FC<Props> = ({ metaTitle, children }): JSX.Element => {
       </Head>
       <div
         className={`absolute inset-0 block ${
-          router.pathname.includes('contact') || router.pathname.includes('portfolio')
-            ? "bg-[url('/images/shapes-bg-down.svg')]"
-            : "bg-[url('/images/shapes-bg-up.svg')]"
+          router.pathname.includes('contact') && "bg-[url('/images/contact-shapes-bg.svg')]"
         } bg-cover  bg-fixed bg-center`}
       ></div>
       <header
-        className={`sticky top-0 z-50 w-full bg-transparent  ${
-          navBg
-            ? 'bg-white/60 drop-shadow-md backdrop-blur-md transition duration-300 ease-in-out'
-            : ' bg-gray-50 drop-shadow-none'
-        }`}
+        className={`ease-in-out' } sticky top-0 z-50 w-full bg-white/60 drop-shadow-md backdrop-blur-md transition
+        duration-300`}
       >
         <Navbar />
       </header>
