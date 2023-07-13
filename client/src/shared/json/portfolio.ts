@@ -151,4 +151,30 @@ export const portfolio = [
     start_date: '2023-05-29',
     finished_date: '2023-06-27',
   },
+  {
+    id: 9,
+    title: 'Personal Portfolio',
+    description:
+      "Rj Oliverio's portfolio website is developed to showcase his professional information in an accessible web app and presents a compilation and/or summary of academic and professional attainments that exemplified his qualifications, education, skills, training, and experiences. This is also a personal upskill project and experience as part of Sun Asterisk's objective report for the 1st half of 2023",
+    image: '/portfolio/pj_portfolio.jpg',
+    technologies: [
+      'Next.js',
+      'TailwindCSS',
+      'React Query',
+      'TypeScript',
+      'Laravel',
+      'Docker',
+      'MySQL',
+    ],
+    github_link: {
+      type: 'web',
+      link: 'https://github.com/rjoliverio/portfolio',
+    },
+    output_link: {
+      type: 'web',
+      link: 'https://rjoliverio.vercel.app/',
+    },
+    start_date: '2023-01-02',
+    finished_date: '2023-10-07',
+  },
 ]

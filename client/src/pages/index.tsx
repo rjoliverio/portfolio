@@ -63,7 +63,7 @@ const Home: NextPage = () => {
                 </MotionDiv>
               </div>
               <span className=" font-semibold ">HELLO 👋</span>
-              <span className="text-[43px] font-bold text-gray-700 md:text-5xl">
+              <span className="text-4xl font-bold text-gray-700 md:text-5xl">
                 I&apos;m{' '}
                 <span className="bg-gradient-to-r from-cyan-500 to-blue-400 bg-clip-text text-transparent">
                   {' '}
