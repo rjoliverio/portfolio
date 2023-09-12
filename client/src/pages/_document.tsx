@@ -11,11 +11,6 @@ class Document extends NextDocument {
             content="gQxLz6yanrXY28v-KEbfdhihGvSpLIUXR2UBE7IRQBo"
           />
           <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
-          <meta
-            name="description"
-            content="Hi! I am Rj Oliverio and this website is developed to showcase a summary of my academic and professional information that exemplified my qualifications, portfolio, skills, achievements, and experiences."
-            key="desc"
-          />
           <meta property="og:title" content="Rj Oliverio | Making websites that work for you" />
           <meta property="og:description" content="Learn more about Rj Oliverio" />
           <meta property="og:image" content="/images/seo-cover.png" />
