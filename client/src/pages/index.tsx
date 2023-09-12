@@ -28,7 +28,10 @@ const TypeAnimation = dynamic(
 const Home: NextPage = () => {
   const router = useRouter()
   return (
-    <Layout metaTitle="Rj Oliverio | Home">
+    <Layout
+      metaTitle="Rj Oliverio | Home"
+      metaDescription="Rj Oliverio is a passionate and task-driven IT professional with substantial experience in web design and development. Equipped with the skills in managing database, API development, frontend integration and software containerization."
+    >
       <section className="z-10 h-full w-full">
         <MotionDiv variants={routeAnimation} initial="initial" animate="animate" exit="exit">
           <div className="mx-auto flex max-w-6xl items-center justify-center space-x-5 lg:justify-between ">

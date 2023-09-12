@@ -6,16 +6,18 @@ import Navbar from './Navbar'
 
 type Props = {
   metaTitle: string
+  metaDescription?: string
   children: ReactNode
 }
 
-const Layout: FC<Props> = ({ metaTitle, children }): JSX.Element => {
+const Layout: FC<Props> = ({ metaTitle, children, metaDescription = '' }): JSX.Element => {
   const router = useRouter()
 
   return (
     <div className="relative flex h-full min-h-screen flex-col bg-gray-50 antialiased">
       <Head>
         <title>{metaTitle}</title>
+        <meta name="description" content={metaDescription} key="desc" />
       </Head>
       <div
         className={`absolute inset-0 block ${
@@ -23,8 +25,8 @@ const Layout: FC<Props> = ({ metaTitle, children }): JSX.Element => {
         } bg-cover  bg-fixed bg-center`}
       ></div>
       <header
-        className={`ease-in-out' } sticky top-0 z-50 w-full bg-white/60 drop-shadow-md backdrop-blur-md transition
-        duration-300`}
+        className={`sticky top-0 z-50 w-full bg-white/60 drop-shadow-md backdrop-blur-md transition duration-300
+        ease-in-out`}
       >
         <Navbar />
       </header>
